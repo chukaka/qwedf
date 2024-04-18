@@ -1,0 +1,56 @@
+.legendary-skin-container {
+    display: flex;
+    align-items: center; /* Центрирование элементов по вертикали */
+    justify-content: space-between; /* Распределение элементов по горизонтали */
+    padding: 0 5%;
+    height: 70px;
+    background-color: rgba(56, 51, 51, 0.5);
+    border-radius: 15px;
+    width: auto;
+    margin-bottom: 10px; 
+    margin-top: 10px; 
+  }
+  
+  .legendary-skin-texts {
+    display: flex;
+    color: rgb(219, 193, 47);
+    flex-direction: column; /* Элементы располагаются в столбец */
+    align-items: flex-start; /* Выравнивание элементов по левому краю */
+  }
+  .legendary-skin-texts p{
+    margin: 0 5px;
+  }
+  
+  
+  .legendary-skin-price {
+    display: inline-block;
+    font-size: 12px;
+  }
+  
+  .text-content {
+    display: inline-block;
+    margin-right: 5px; /* Отступ справа от текста */
+  }
+  
+  .legendary-small-image {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -5px;
+    margin-top: -2px;
+    width: 14%; /* Отступ слева от изображения */
+  }
+  
+  
+  
+  
+  .legendary-skin-image {
+    width: 21%; /* Максимальная ширина изображения */
+  }
+  
+  .legendary-big-image{
+    width: 25%;
+  }
+  
+  .legendary-skin-name {
+    color: rgb(153, 155, 153);
+  }

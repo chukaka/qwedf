@@ -1,0 +1,40 @@
+.main-button {
+    display: flex;
+    height: 80px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+  
+  }
+  
+  .button-section {
+    flex: 1;
+    text-align: center;
+    display: flex; /* Добавляем display: flex */
+    flex-direction: column; /* Размещаем содержимое в колонку */
+    justify-content: center; /* Выравниваем по центру по вертикали */
+    position: relative;
+    color: #fff;
+  }
+  
+  .emoji {
+    margin: 0 auto; /* Центрируем изображение по горизонтали */
+    display: block; /* Делаем изображение блочным элементом */
+    width: 29px; /* Ширина изображения */
+    height: auto;
+  }
+  .button-section:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 25%;
+    bottom: 25%;
+    right: 0;
+    width: 1px;
+    background-color: #ffffff07;
+  }
+  
+  .link-style {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.204);
+  }
+  

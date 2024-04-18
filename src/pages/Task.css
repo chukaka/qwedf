@@ -1,0 +1,46 @@
+.task-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .task-back-button {
+    height: 30px;
+    width: 20%;
+    border-radius: 10px;
+    background-color: rgba(71, 68, 68, 0.35);
+    margin-top: 10px;
+    margin-left: 7px;
+    margin-right: auto; /* Помещаем кнопку в начало контейнера */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .task-back-link {
+    color: gray;
+    font-size: 12px;
+    line-height: 40px; /* Выравнивание текста по центру */
+    text-decoration: none; /* Удаление подчеркивания */
+  }
+  
+  
+  .task-center-text {
+    width: 86%;
+    height: 15px;
+    display: flex;
+    font-size: 40px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 35px;
+    margin-top: 25px;
+  }
+  
+  .task-components {
+    margin-top: 35px;
+    width: 92%;
+  }
+  
+
+

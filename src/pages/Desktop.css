@@ -1,0 +1,15 @@
+/* Desktop.css */
+
+.image-container-desktop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Выравниваем по центру по вертикали */
+  }
+  
+  .image {
+    max-width: 80%;
+    display: block;
+    margin: 0 auto; /* Размещаем по центру по горизонтали */
+  }
+  

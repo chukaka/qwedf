@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Braah+One&family=Konkhmer+Sleokchher&family=Ramabhadra&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+.container {
+  padding: 20px 0 50px;
+  text-align: center;
+  background: radial-gradient(circle at center, rgb(40, 40, 36), black);
+  min-height: 100vh; /* Минимальная высота контейнера равна высоте видимой области */
+}
+
+
+.top-section {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 25px;
+  line-height: 30px;
+  color: #e7f21a;
+  font-size: 18px;
+  height: 20px;
+}
+
+.middle-section {
+  font-family: "Konkhmer Sleokchher", system-ui;
+  margin-bottom: 25px;
+  line-height: 30px;
+  color: #ffffffea;
+  font-size: 2rem;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+.coin-icon {
+  width: 45px; /* Ширина изображения монетки */
+  height: auto; /* Автоматическая высота, чтобы сохранить пропорции */
+  margin-right: 5px; /* Отступ между изображением монетки и текстом */
+}
+.balance {
+  font-family: "Konkhmer Sleokchher", system-ui;
+  color: #ffffffea;
+  font-size: 2.5rem;
+}
+
+.third-section {
+  height: 30%;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.bottom-section {
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.top-section2 {
+  position: relative; /* Добавляем относительное позиционирование */
+  font-family: "Konkhmer Sleokchher", system-ui;
+  height: 30px;
+  margin-bottom: 10px;
+  line-height: 30px;
+  color: #30e34bad;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.additional-block {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 30px;
+  background-color: #ccc; /* Серый цвет */
+}
+
+
+.top-section2.show {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.overlay-block {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 52px;
+  height: 50px;
+  background-color: #cccccc0f;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  text-align: center; /* Центрируем содержимое по горизонтали */
+  line-height: 50px; /* Выравниваем содержимое по вертикали */
+}
+
+.overlay-text {
+  font-size: 10px;
+  margin-top: -10px;
+  color: #ffffff;  
+  font-family: "Luckiest Guy", cursive;
+}
+
+
+
+.link-style {
+  text-decoration: none;
+
+}

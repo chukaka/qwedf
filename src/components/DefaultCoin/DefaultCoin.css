@@ -1,0 +1,51 @@
+/* DefaultCoin.css */
+
+/* Основной контейнер монетки */
+.coin {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+  }
+  
+  /* Анимация при нажатии */
+  .coin.pressed {
+    transform: scale(0.9); /* Масштабирование при нажатии */
+  }
+  
+  /* Изображение монетки */
+  .coin-image {
+    width: 350px; /* Размер монетки */
+    height: auto;
+    user-select: none; /* Предотвращает выделение изображения */
+  }
+  
+  /* Стили для маленьких монеток */
+  .small-coin {
+    position: absolute;
+    width: 35px; /* Размер маленькой монетки */
+    height: auto;
+    opacity: 0.7; /* Прозрачность 70% */
+    transition: transform 0.5s ease-out, opacity 0.1s ease-out, top 1s ease-out;
+  }
+  
+  /* Анимация для маленьких монеток */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Анимация при уходе маленькой монетки вверх */
+  @keyframes fly-up {
+    from {
+      transform: translateY(0) rotate(0);
+    }
+    to {
+      transform: translateY(-320px) rotate(360deg); /* Улетает вверх и крутится */
+      opacity: 0;
+    }
+  }
+  

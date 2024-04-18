@@ -1,0 +1,48 @@
+.default-skin-container {
+    display: flex;
+    align-items: center; /* Центрирование элементов по вертикали */
+    justify-content: space-between; /* Распределение элементов по горизонтали */
+    padding: 0 5%;
+    height: 70px;
+    background-color: rgba(56, 51, 51, 0.5);
+    border-radius: 15px;
+    width: auto;
+    margin-bottom: 10px; 
+    margin-top: 10px; 
+  }
+  
+  .default-skin-texts {
+    display: flex;
+    color: rgb(219, 193, 47);
+    flex-direction: column; /* Элементы располагаются в столбец */
+    align-items: flex-start; /* Выравнивание элементов по левому краю */
+  }
+  
+  .default-skin-name {
+  
+  }
+  
+  .default-skin-price {
+    display: flex;
+    font-size: 12px;
+    align-items: center; /* Центрирование элементов внутри */
+  }
+  
+  .default-skin-price span {
+    margin-right: 5px; 
+    
+  }
+  
+  .default-skin-image {
+    width: 22%; /* Максимальная ширина изображения */
+  }
+  .default-small-image { 
+    width: 9%;
+  }
+  .default-big-image{
+    width: 25%;
+  }
+  
+  .default-skin-name {
+    color: rgb(153, 155, 153);
+  }

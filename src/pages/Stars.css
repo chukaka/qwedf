@@ -1,0 +1,20 @@
+.star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background-color: white;
+    border-radius: 50%;
+    z-index: -1; /* Устанавливаем отрицательное значение z-index */
+  }
+  
+  @keyframes fly {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--x-end), var(--y-end)) scale(var(--scale-end));
+      opacity: 0;
+    }
+  }
+  
