@@ -17,8 +17,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Stars /> */}
-      <Router>
+      <Stars />
+      <Router basename="/qwedf">
         <Switch>
           <Route component={HomePage} path="/" exact />
           <Route component={ClaimPage} path="/claim" exact />
