@@ -16,6 +16,7 @@ const getUserDataFromServer = async (userId) => {
       localStorage.setItem("bonus", response.data[0].bonus);
       localStorage.setItem("speed", response.data[0].speed);
       localStorage.setItem("got", "true");
+      console.log('did it');
     }
     return response.data;
   } catch (error) {
