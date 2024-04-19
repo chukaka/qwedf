@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/qwedf/static/css/main.bb46fa21.css",
-    "main.js": "/qwedf/static/js/main.fd9e991e.js",
+    "main.js": "/qwedf/static/js/main.b0d44a70.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
@@ -17,10 +17,10 @@
     "static/media/Kick_logo.svg.png": "/qwedf/static/media/Kick_logo.svg.535a23faaa0c9283881a.png",
     "index.html": "/qwedf/index.html",
     "main.bb46fa21.css.map": "/qwedf/static/css/main.bb46fa21.css.map",
-    "main.fd9e991e.js.map": "/qwedf/static/js/main.fd9e991e.js.map"
+    "main.b0d44a70.js.map": "/qwedf/static/js/main.b0d44a70.js.map"
   },
   "entrypoints": [
     "static/css/main.bb46fa21.css",
-    "static/js/main.fd9e991e.js"
+    "static/js/main.b0d44a70.js"
   ]
 }
