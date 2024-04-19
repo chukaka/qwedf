@@ -190,7 +190,6 @@ const HomePage = () => {
       const timeoutId = setTimeout(() => {
         window.location.reload();
       }, 3000);
-      localStorage.setItem("got", "true");
 
   
       return () => clearTimeout(timeoutId);
