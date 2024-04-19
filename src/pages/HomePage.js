@@ -188,8 +188,6 @@ const HomePage = () => {
     if (localStorage.getItem("got") !== "true") {
       getUserDataFromServer(userId);
       const timeoutId = setTimeout(() => {
-        console.log('Dont');
-        localStorage.setItem("got", "true");
         window.location.reload();
       }, 1500);
 
