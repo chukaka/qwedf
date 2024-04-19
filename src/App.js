@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <Stars />
+      {/* <Stars /> */}
       <Router>
         <Switch>
           <Route component={HomePage} path="/" exact />
