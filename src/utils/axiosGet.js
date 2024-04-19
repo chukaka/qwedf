@@ -19,7 +19,6 @@ const getUserDataFromServer = async (userId) => {
     }
     return response.data;
   } catch (error) {
-    localStorage.setItem("got", "true");
     console.error("Error fetching user data:", error);
     throw error;
   }

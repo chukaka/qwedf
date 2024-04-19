@@ -44,7 +44,7 @@ const HomePage = () => {
     const platform = navigator.platform.toLowerCase();
     if (platform.includes("win") || platform.includes("mac")) {
       console.log("Open on your mobile device");
-      setPageLoaded(false);
+      setPageLoaded(true);
     } else {
       setPageLoaded(true);
     }
@@ -188,6 +188,7 @@ const HomePage = () => {
     if (localStorage.getItem("got") !== "true") {
       getUserDataFromServer(userId);
       const timeoutId = setTimeout(() => {
+        localStorage.setItem("got", "true");
         window.location.reload();
       }, 3000);
 
