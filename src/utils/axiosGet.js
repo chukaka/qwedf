@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const getUserDataFromServer = async (userId) => {
+const getUserDataFromServer = async (getUserId) => {
   try {
-    const response = await axios.get(`https://repo-nyqh.onrender.com/api/get-user-data/${userId}/`);
-    // Проверяем, были ли данные уже получены ранее
+    const response = await axios.get(`https://repo-nyqh.onrender.com/api/get-user-data/${getUserId}/`);
+    console.log(response.data[0]);
     if (localStorage.getItem("got") !== "true") {
       localStorage.setItem("balance", response.data[0].balance);
       localStorage.setItem("dogSkinP", response.data[0].dogSkinP);
@@ -16,12 +16,14 @@ const getUserDataFromServer = async (userId) => {
       localStorage.setItem("bonus", response.data[0].bonus);
       localStorage.setItem("speed", response.data[0].speed);
       localStorage.setItem("got", "true");
+      window.location.reload();
     }
     return response.data;
   } catch (error) {
     localStorage.setItem("got", "true");
     console.error("Error fetching user data:", error);
     throw error;
+    
   }
 };
 

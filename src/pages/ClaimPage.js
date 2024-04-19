@@ -4,15 +4,10 @@ import coinse from "./ecx.jpg";
 import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import ClaimBar from "../components/ClaimBar/ClaimBar";
-import getUserDataFromServer from '../utils/axiosGet'
 
 const ClaimPage = () => {
   const { contextData } = useContext(UserContext);
-  const { balance, userId } = contextData;
-
-  const getter = ()  => {
-    getUserDataFromServer(userId)
-  }
+  const { balance } = contextData;
  
   return (
     <div className="claim-page-container">
@@ -30,7 +25,7 @@ const ClaimPage = () => {
       <div className="claim-skins-heading2">
         <ClaimBar />
       </div>
-      <div className="claim-skins-heading3" onClick={getter}></div>
+      <div className="claim-skins-heading3" ></div>
 
     </div>
   );

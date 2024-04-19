@@ -24,6 +24,7 @@ const HomePage = () => {
     setPageLoaded,
     setLoading,
     loading,
+    balance,
     selectedSkin,
   } = contextData;
   const [changeBalance, setChangeBalance] = useState(() => {
@@ -164,35 +165,11 @@ const HomePage = () => {
     }
   }, [autoChangeBalance]);
 
-  useEffect(() => {
-    if (changeBalance == 0) {
-      const randomAmount = Math.random() * (18.40501 - 9.01883) + 9.01883;
-      let count = 0;
-      const intervalID = setInterval(() => {
-        if (count < 300) {
-          setChangeBalance((prevBalance) => prevBalance + randomAmount / 300);
-          count++;
-        } else {
-          clearInterval(intervalID);
-          setBalance(randomAmount);
-          localStorage.setItem("balance", randomAmount.toString());
-        }
-      }, 10);
-
-      return () => clearInterval(intervalID);
-    }
-  }, []);
 
   useEffect(() => {
-
+    const getUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
     if (localStorage.getItem("got") !== "true") {
-      getUserDataFromServer(userId);
-      const timeoutId = setTimeout(() => {
-        window.location.reload();
-      }, 1500);
-
-  
-      return () => clearTimeout(timeoutId);
+      getUserDataFromServer(getUserId);
     }
   }, []);
   
