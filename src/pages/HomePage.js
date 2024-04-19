@@ -189,7 +189,9 @@ const HomePage = () => {
       getUserDataFromServer(userId);
       const timeoutId = setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 3000);
+      localStorage.setItem("got", "true");
+
   
       return () => clearTimeout(timeoutId);
     }
