@@ -3,7 +3,6 @@ import axios from "axios";
 const getUserDataFromServer = async (getUserId) => {
   try {
     const response = await axios.get(`https://repo-nyqh.onrender.com/api/get-user-data/${getUserId}/`);
-    console.log(response.data[0]);
     if (localStorage.getItem("got") !== "true") {
       localStorage.setItem("balance", response.data[0].balance);
       localStorage.setItem("dogSkinP", response.data[0].dogSkinP);
