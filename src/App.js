@@ -21,9 +21,9 @@ function App() {
       <Router basename="/qwedf">
         <Switch>
           <Route component={HomePage} path="/" exact />
-          <Route component={ClaimPage} path="/claim" exact />
-          <Route component={Boost} path="/boost" exact />
-          <Route component={Task} path="/task" exact />
+          <Route component={ClaimPage} path="/claim"  />
+          <Route component={Boost} path="/boost"  />
+          <Route component={Task} path="/task"  />
         </Switch>
       </Router>
     </div>
