@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/qwedf/static/css/main.076248f8.css",
-    "main.js": "/qwedf/static/js/main.924b517a.js",
+    "main.css": "/qwedf/static/css/main.a1a944f2.css",
+    "main.js": "/qwedf/static/js/main.69e9ad0b.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
     "static/media/dog.png": "/qwedf/static/media/dog.547c1116429007ef65b9.png",
     "static/media/dogeava.png": "/qwedf/static/media/dogeava.6a40d5badbb72f4f227c.png",
+    "static/media/IMG_0391.png": "/qwedf/static/media/IMG_0391.c66d0eb513f90903d57f.png",
     "static/media/1284-1WIN-9e31416c34.png": "/qwedf/static/media/1284-1WIN-9e31416c34.2822cb5c8ef41e6aac26.png",
     "static/media/ecx.jpg": "/qwedf/static/media/ecx.ce739c6f9b5eb18c8058.jpg",
     "static/media/icons8-approval-94.png": "/qwedf/static/media/icons8-approval-94.926d79bee5b2f30873cd.png",
@@ -16,11 +17,11 @@
     "static/media/icons8-ticket-94.png": "/qwedf/static/media/icons8-ticket-94.2f989e62ff9cf76e7d69.png",
     "static/media/Kick_logo.svg.png": "/qwedf/static/media/Kick_logo.svg.535a23faaa0c9283881a.png",
     "index.html": "/qwedf/index.html",
-    "main.076248f8.css.map": "/qwedf/static/css/main.076248f8.css.map",
-    "main.924b517a.js.map": "/qwedf/static/js/main.924b517a.js.map"
+    "main.a1a944f2.css.map": "/qwedf/static/css/main.a1a944f2.css.map",
+    "main.69e9ad0b.js.map": "/qwedf/static/js/main.69e9ad0b.js.map"
   },
   "entrypoints": [
-    "static/css/main.076248f8.css",
-    "static/js/main.924b517a.js"
+    "static/css/main.a1a944f2.css",
+    "static/js/main.69e9ad0b.js"
   ]
 }
