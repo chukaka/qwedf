@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/qwedf/static/css/main.a1a944f2.css",
-    "main.js": "/qwedf/static/js/main.72c6bb5f.js",
+    "main.css": "/qwedf/static/css/main.861daf5d.css",
+    "main.js": "/qwedf/static/js/main.53fc3c53.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
     "static/media/dog.png": "/qwedf/static/media/dog.547c1116429007ef65b9.png",
     "static/media/dogeava.png": "/qwedf/static/media/dogeava.6a40d5badbb72f4f227c.png",
     "static/media/IMG_0391.png": "/qwedf/static/media/IMG_0391.c66d0eb513f90903d57f.png",
-    "static/media/1284-1WIN-9e31416c34.png": "/qwedf/static/media/1284-1WIN-9e31416c34.2822cb5c8ef41e6aac26.png",
+    "static/media/photo1715189337-removebg-preview.png": "/qwedf/static/media/photo1715189337-removebg-preview.4754a63b785573ca1f00.png",
+    "static/media/png": "/qwedf/static/media/c44b0a52b3c760a9934b4c47d13152c9.c1ef61b3bd712aa238b4.png",
     "static/media/ecx.jpg": "/qwedf/static/media/ecx.ce739c6f9b5eb18c8058.jpg",
+    "static/media/8482621.png": "/qwedf/static/media/8482621.9c9389381ab245c5b6af.png",
     "static/media/icons8-approval-94.png": "/qwedf/static/media/icons8-approval-94.926d79bee5b2f30873cd.png",
     "static/media/Telegram.png": "/qwedf/static/media/Telegram.a3805538b4a07d60cefa.png",
     "static/media/icons8-gold-pot-94.png": "/qwedf/static/media/icons8-gold-pot-94.7eb913b4442cde819a29.png",
@@ -17,11 +19,11 @@
     "static/media/icons8-ticket-94.png": "/qwedf/static/media/icons8-ticket-94.2f989e62ff9cf76e7d69.png",
     "static/media/Kick_logo.svg.png": "/qwedf/static/media/Kick_logo.svg.535a23faaa0c9283881a.png",
     "index.html": "/qwedf/index.html",
-    "main.a1a944f2.css.map": "/qwedf/static/css/main.a1a944f2.css.map",
-    "main.72c6bb5f.js.map": "/qwedf/static/js/main.72c6bb5f.js.map"
+    "main.861daf5d.css.map": "/qwedf/static/css/main.861daf5d.css.map",
+    "main.53fc3c53.js.map": "/qwedf/static/js/main.53fc3c53.js.map"
   },
   "entrypoints": [
-    "static/css/main.a1a944f2.css",
-    "static/js/main.72c6bb5f.js"
+    "static/css/main.861daf5d.css",
+    "static/js/main.53fc3c53.js"
   ]
 }
