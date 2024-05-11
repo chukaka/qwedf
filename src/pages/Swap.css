@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Poetsen+One&family=Rowdies:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 .swap-page-container {
     display: flex;
     flex-direction: column;
@@ -41,15 +45,18 @@
 .usdt-field {
     color: rgb(255, 231, 48);
     font-size: 20px;
+    font-family: "Montserrat", sans-serif;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 88%;
+    margin-left: 5px;
 }
 
 .balance-field span,
 .usdt-field span {
-    margin-right: 5px;
+
+    font-family: "Montserrat", sans-serif;
 }
 
 .balance-input {
@@ -59,6 +66,7 @@
     align-items: flex-end;
     margin-top: 20px;
     margin-left: 13px;
+    font-family: "Montserrat", sans-serif;
 }
 
 .balance-label {
@@ -84,7 +92,7 @@
 }
 
 .balance-in::placeholder {
-    color: #bbb;
+    color: #5a5a5a;
 }
 
 .usdt-input {
@@ -92,7 +100,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-
+    font-family: "Montserrat", sans-serif;
     margin-left: 13px;
 }
 
@@ -108,17 +116,18 @@
 }
 
 .usdt-in::placeholder {
-    color: #bbb;
+    color: #5a5a5a;
 }
 
 .refresh-icon {
     width: 40px;
     cursor: pointer;
     margin-top: 20px;
+    margin-left: -5px;
 }
 
 .infotext {
-    margin-top: 80px;
+    margin-top: 30px;
     color: #bbb;
     width: 88%;
     font-size: 10px;
@@ -127,13 +136,42 @@
 .area {
     display: flex;
     align-items: flex-end;
-    margin-left: 13px;
-}
+    width: 90%;
 
-.area-label {
-    margin-right: 10px;
-    color: #bbb;
 }
+.toptext {
+    color: rgb(226, 253, 253);
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 40px;
+    margin-bottom: 20px;
+
+}
+.overtext {
+    margin-top: 20px;
+    color: #bbb;
+    width: 88%;
+    font-size: 13px;
+  }
+  
+  .overtext p {
+    margin: 6px 0; /* Уменьшаем расстояние между строками по вертикали */
+    display: flex;
+    justify-content: space-between; /* Равномерно распределяем элементы по горизонтали */
+  }
+  
+  .overtext p span {
+    flex: 1; /* Равномерно распределяем ширину между элементами */
+    text-align: left; /* Выравниваем текст слева */
+  }
+  
+  .overtext p span:last-child {
+    text-align: right; /* Выравниваем текст справа */
+  }
+  
+  
 
 .area-in {
     width: 100%;
@@ -142,26 +180,31 @@
     border-radius: 13px;
     background-color: rgba(31, 28, 34, 0.534);
     padding: 8px;
-    font-size: 16px;
+    
     color: #bbb;
     resize: none; /* Запретить изменение размера текстовой области */
     line-height: 24px; /* Высота строки */
-    margin-right: 10px; /* Пространство между текстовой областью и кнопкой */
+    margin-right: 10px;
+    margin-top: 20px;
+    font-size: 11px; /* Пространство между текстовой областью и кнопкой */
 }
 
 .area-in::placeholder {
-    color: #bbb;
-    margin-left: 8px; /* Отступ слева */
+    color: #5a5a5a;
+    margin-left: 8px;
+    font-size: 11px; /* Отступ слева */
 }
 
 button {
-    height: 48px;
+    height: 35px;
     background-color: #eee; /* Светлосерый цвет */
     border: none;
     border-radius: 13px;
     padding: 0 15px;
-    font-size: 16px;
+    font-size: 9px;
     color: #2c2c2c;
+    margin-right: 3px;
+    margin-top: -12px;
 }
 
 button:disabled {

