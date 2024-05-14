@@ -8,7 +8,7 @@ const ClaimBar = () => {
     const calculateProgress = () => {
       const startDate = new Date('2024-04-02'); // Дата начала
       const currentDate = new Date(); // Текущая дата
-      const totalDays = 100; // Общее количество дней для прогрессбара
+      const totalDays = 46; // Общее количество дней для прогрессбара
 
       // Вычисляем количество пройденных дней с начала
       const elapsedDays = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));

@@ -21,7 +21,7 @@ const ClaimPage = () => {
       <div className="claim-boost-components">
         <img src={coinse} alt="Bottom Icon" />
       </div>
-      <div className="claim-skins-heading">COMING SOON..</div>
+      <div className="claim-skins-heading">18.05.2024</div>
       <div className="claim-skins-heading2">
         <ClaimBar />
       </div>

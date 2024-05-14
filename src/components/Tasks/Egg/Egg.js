@@ -24,7 +24,7 @@ const Egg = () => {
 
   return (
     <div className={clicked ? "disabled" : ""} onClick={handleClick}>      
-        <a href="https://t.me/uniegg_bot" className="egg-skin-container">
+        <a href="https://t.me/uniegg" className="egg-skin-container">
           <img src={kickLogo} alt="Egg Skin" className="egg-skin-image" />
           <div className="egg-skin-info">
             <p className="egg-skin-name">Зайти в игру и собрать 100 🥚</p>
