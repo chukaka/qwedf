@@ -23,6 +23,12 @@
     width: 29px; /* Ширина изображения */
     height: auto;
   }
+  .emojiswap {
+    margin: 2px auto; /* Центрируем изображение по горизонтали */
+    display: block; /* Делаем изображение блочным элементом */
+    width: 23px; /* Ширина изображения */
+    height: auto;
+  }
   .button-section:not(:last-child)::after {
     content: '';
     position: absolute;
