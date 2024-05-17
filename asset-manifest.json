@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/qwedf/static/css/main.9a93e632.css",
-    "main.js": "/qwedf/static/js/main.28dfbf00.js",
+    "main.css": "/qwedf/static/css/main.20929761.css",
+    "main.js": "/qwedf/static/js/main.061ce24b.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
@@ -15,16 +15,15 @@
     "static/media/8482621.png": "/qwedf/static/media/8482621.9c9389381ab245c5b6af.png",
     "static/media/icons8-approval-94.png": "/qwedf/static/media/icons8-approval-94.926d79bee5b2f30873cd.png",
     "static/media/Telegram.png": "/qwedf/static/media/Telegram.a3805538b4a07d60cefa.png",
-    "static/media/icons8-gold-pot-94.png": "/qwedf/static/media/icons8-gold-pot-94.7eb913b4442cde819a29.png",
     "static/media/icons8-dollar-coin-94.png": "/qwedf/static/media/icons8-dollar-coin-94.b0de48c3bc9ed54be440.png",
     "static/media/icons8-ticket-94.png": "/qwedf/static/media/icons8-ticket-94.2f989e62ff9cf76e7d69.png",
     "static/media/Kick_logo.svg.png": "/qwedf/static/media/Kick_logo.svg.535a23faaa0c9283881a.png",
     "index.html": "/qwedf/index.html",
-    "main.9a93e632.css.map": "/qwedf/static/css/main.9a93e632.css.map",
-    "main.28dfbf00.js.map": "/qwedf/static/js/main.28dfbf00.js.map"
+    "main.20929761.css.map": "/qwedf/static/css/main.20929761.css.map",
+    "main.061ce24b.js.map": "/qwedf/static/js/main.061ce24b.js.map"
   },
   "entrypoints": [
-    "static/css/main.9a93e632.css",
-    "static/js/main.28dfbf00.js"
+    "static/css/main.20929761.css",
+    "static/js/main.061ce24b.js"
   ]
 }
