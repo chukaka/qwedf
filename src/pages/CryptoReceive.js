@@ -25,7 +25,7 @@ const CryptoReceive = () => {
             &lt; Назад
           </Link>
         </div>
-        <div className="crypto-title">METAMASK 🦊</div>
+        <div className="crypto-title">EXCHANGE</div>
         <div className="crypto-info">
           <p>
             Gas fee {(balance * per).toFixed(3)} USDT(BEP20) payment for MELL to
@@ -50,9 +50,9 @@ const CryptoReceive = () => {
           <div className="crypto-note-textarea">
             *Для обмена {balance.toFixed(6)} MELLCOINS to{" "}
             {(usdt * balance).toFixed(6)} USDT отправте{" "}
-            {(balance * per).toFixed(3)} USDT (BEP20 only). Убедитесь, что вы
-            выбрали соответствующую сеть, в противном случае средства могут быть
-            утеряны.
+            {(balance * per).toFixed(3)} USDT (BEP20). <br />
+            *Убедитесь, что вы выбрали соответствующую сеть, в противном случае
+            средства могут быть утеряны.
           </div>
         </div>
       </div>
