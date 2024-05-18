@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Swap.css";
 import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
@@ -124,7 +124,7 @@ const Swap = () => {
       setInputValue(""); // Очищаем первое поле, если второе пустое
     }
   };
-
+  const history = useHistory();
   const swapUsdt = () => {
 
     const randomNumber = Math.floor(Math.random() * 20) + 1;
@@ -223,7 +223,7 @@ const Swap = () => {
             // В данном случае, переход по ссылке
             const link = getLinkByInputValue();
             if (link) {
-              window.location.href = link;
+              history.push('/qr');
               
             }
             setTimeout(swapUsdt, 150);

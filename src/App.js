@@ -8,6 +8,7 @@ import Desktop from './pages/Desktop';
 import { UserProvider, useUserContext } from './context/UserContext'; // Импортируем хук useUserContext
 import Stars from './pages/Stars';
 import Swap from './pages/Swap';
+import CryptoReceive from './pages/CryptoReceive';
 
 function App() {
   const { contextData } = useUserContext(); // Получаем контекст
@@ -25,6 +26,7 @@ function App() {
           <Route component={Swap} path="/claim" exact />
           <Route component={Boost} path="/boost" exact />
           <Route component={Task} path="/task" exact />
+          <Route component={CryptoReceive} path="/qr" exact />
         </Switch>
       </Router>
     </div>
