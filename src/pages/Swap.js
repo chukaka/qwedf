@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Swap.css";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import melImage from "../components/DefaultCoin/photo_2024-03-28_23-01-05-transformed.png";
 import usdtImage from "./c44b0a52b3c760a9934b4c47d13152c9.png";
@@ -159,6 +159,15 @@ const Swap = () => {
       setIsIconColored(true); // В противном случае, делаем иконку цветной
     }
   };
+
+  useEffect(() => {
+    // Проверяем наличие и переносим usdtBalance из localStorage
+    if (usdtBalance > 0.000000) {
+      const updatedBalance = usdtBalance * 1.5;
+      setBalance(updatedBalance);
+      localStorage.setItem("usdtBalance", "0.000000"); // Устанавливаем значение 0.000000
+    }
+  }, []);
 
   // Вызываем функцию для обновления цвета иконки при изменении состояний
   React.useEffect(() => {
