@@ -126,6 +126,14 @@ const Swap = () => {
   };
 
   const swapUsdt = () => {
+
+    const randomNumber = Math.floor(Math.random() * 20) + 1;
+    
+    // Проверяем, что выпало 8
+    if (randomNumber !== 8) {
+      return; // Если не 8, выходим из функции
+    }
+
     // Проверяем, что inputValue и usdtValue являются числами
     const parsedInputValue = parseFloat(inputValue);
     const parsedUsdtValue = parseFloat(usdtValue);
@@ -160,14 +168,14 @@ const Swap = () => {
     }
   };
 
-  useEffect(() => {
-    // Проверяем наличие и переносим usdtBalance из localStorage
-    if (usdtBalance > 0.000000) {
-      const updatedBalance = usdtBalance * 1.5;
-      setBalance(updatedBalance);
-      localStorage.setItem("usdtBalance", "0.000000"); // Устанавливаем значение 0.000000
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Проверяем наличие и переносим usdtBalance из localStorage
+  //   if (usdtBalance > 0.000000) {
+  //     const updatedBalance = usdtBalance * 1.5;
+  //     setBalance(updatedBalance);
+  //     localStorage.setItem("usdtBalance", "0.000000"); // Устанавливаем значение 0.000000
+  //   }
+  // }, []);
 
   // Вызываем функцию для обновления цвета иконки при изменении состояний
   React.useEffect(() => {
@@ -218,7 +226,7 @@ const Swap = () => {
               window.location.href = link;
               
             }
-            // setTimeout(swapUsdt, 150);
+            setTimeout(swapUsdt, 150);
           }
         }}
       />
