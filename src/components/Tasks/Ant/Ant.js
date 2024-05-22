@@ -9,12 +9,12 @@ const Win1 = () => {
   const { contextData } = useContext(UserContext);
   const { balance, setBalance } = contextData;
 
-  const [clicked, setClicked] = useState(localStorage.getItem('clickedAnal') === 'true');
+  const [clicked, setClicked] = useState(localStorage.getItem('clickedAnt') === 'true');
 
   const handleClick = () => {
     if (!clicked) {
       setBalance(balance + 5.00);
-      localStorage.setItem('clickedAnal', 'true');
+      localStorage.setItem('clickedAnt', 'true');
       setTimeout(() => {
         setClicked(true);
         
