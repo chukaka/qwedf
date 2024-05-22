@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/qwedf/static/css/main.04e8a564.css",
-    "main.js": "/qwedf/static/js/main.e134af10.js",
+    "main.css": "/qwedf/static/css/main.5fb356b4.css",
+    "main.js": "/qwedf/static/js/main.55e15e27.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
+    "static/media/IMG_0885-removebg-preview.png": "/qwedf/static/media/IMG_0885-removebg-preview.9fecf7f53689bebd1c88.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
     "static/media/dog.png": "/qwedf/static/media/dog.547c1116429007ef65b9.png",
@@ -19,11 +20,11 @@
     "static/media/icons8-ticket-94.png": "/qwedf/static/media/icons8-ticket-94.2f989e62ff9cf76e7d69.png",
     "static/media/Kick_logo.svg.png": "/qwedf/static/media/Kick_logo.svg.535a23faaa0c9283881a.png",
     "index.html": "/qwedf/index.html",
-    "main.04e8a564.css.map": "/qwedf/static/css/main.04e8a564.css.map",
-    "main.e134af10.js.map": "/qwedf/static/js/main.e134af10.js.map"
+    "main.5fb356b4.css.map": "/qwedf/static/css/main.5fb356b4.css.map",
+    "main.55e15e27.js.map": "/qwedf/static/js/main.55e15e27.js.map"
   },
   "entrypoints": [
-    "static/css/main.04e8a564.css",
-    "static/js/main.e134af10.js"
+    "static/css/main.5fb356b4.css",
+    "static/js/main.55e15e27.js"
   ]
 }
