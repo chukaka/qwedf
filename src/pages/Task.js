@@ -6,6 +6,7 @@ import Kick from "../components/Tasks/Kick/Kick";
 import Mellbet from "../components/Tasks/Mellbet/Mellbet";
 import Win1 from "../components/Tasks/Win1/Win1";
 import Doge from "../components/Tasks/Doge/Doge";
+import Ant from "../components/Tasks/Ant/Ant";
 import Egg from "../components/Tasks/Egg/Egg";
 import MostBet from "../components/Tasks/MostBet/MostBet";
 
@@ -22,7 +23,8 @@ const Task = () => {
         <Public />
         <MostBet />
         <Win1 />
-        <Mellbet />
+        <Ant />
+
         <Egg />
       </div>
     </div>
