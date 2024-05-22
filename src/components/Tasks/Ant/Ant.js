@@ -27,7 +27,7 @@ const Win1 = () => {
         <a href="https://t.me/antitreyder" className="ant-skin-container">
           <img src={kickLogo} alt="Analytics" className="ant-skin-image" />
           <div className="ant-skin-info">
-            <p className="ant-skin-name">Подписаться на Псевдо Аналитик</p>
+            <p className="ant-skin-name">Подписаться на AntiTrader</p>
             <div className="ant-skin-price">
               {!clicked && (
                 <>
