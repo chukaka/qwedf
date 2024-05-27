@@ -24,7 +24,7 @@ const Egg = () => {
 
   return (
     <div className={clicked ? "disabled" : ""} onClick={handleClick}>      
-        <a href="https://t.me/inusider" className="egg-skin-container">
+        <a href="https://t.me/+ICbeJj0DLIU1ZTMy" className="egg-skin-container">
           <img src={kickLogo} alt="Egg Skin" className="egg-skin-image" />
           <div className="egg-skin-info">
             <p className="egg-skin-name">Подписаться на INUSIDER</p>
