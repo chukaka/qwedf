@@ -1,14 +1,13 @@
 {
   "files": {
-    "main.css": "/qwedf/static/css/main.5fb356b4.css",
-    "main.js": "/qwedf/static/js/main.1ce36317.js",
+    "main.css": "/qwedf/static/css/main.ca5b1add.css",
+    "main.js": "/qwedf/static/js/main.288cb0bf.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
     "static/media/IMG_0885-removebg-preview.png": "/qwedf/static/media/IMG_0885-removebg-preview.9fecf7f53689bebd1c88.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
     "static/media/dog.png": "/qwedf/static/media/dog.547c1116429007ef65b9.png",
     "static/media/dogeava.png": "/qwedf/static/media/dogeava.6a40d5badbb72f4f227c.png",
-    "static/media/IMG_0391.png": "/qwedf/static/media/IMG_0391.c66d0eb513f90903d57f.png",
     "static/media/photo1715189337-removebg-preview.png": "/qwedf/static/media/photo1715189337-removebg-preview.4754a63b785573ca1f00.png",
     "static/media/mostbet.png": "/qwedf/static/media/mostbet.9bc2d2554908756f82e4.png",
     "static/media/png": "/qwedf/static/media/c44b0a52b3c760a9934b4c47d13152c9.c1ef61b3bd712aa238b4.png",
@@ -20,11 +19,11 @@
     "static/media/icons8-ticket-94.png": "/qwedf/static/media/icons8-ticket-94.2f989e62ff9cf76e7d69.png",
     "static/media/Kick_logo.svg.png": "/qwedf/static/media/Kick_logo.svg.535a23faaa0c9283881a.png",
     "index.html": "/qwedf/index.html",
-    "main.5fb356b4.css.map": "/qwedf/static/css/main.5fb356b4.css.map",
-    "main.1ce36317.js.map": "/qwedf/static/js/main.1ce36317.js.map"
+    "main.ca5b1add.css.map": "/qwedf/static/css/main.ca5b1add.css.map",
+    "main.288cb0bf.js.map": "/qwedf/static/js/main.288cb0bf.js.map"
   },
   "entrypoints": [
-    "static/css/main.5fb356b4.css",
-    "static/js/main.1ce36317.js"
+    "static/css/main.ca5b1add.css",
+    "static/js/main.288cb0bf.js"
   ]
 }
