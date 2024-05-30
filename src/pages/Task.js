@@ -22,7 +22,7 @@ const Task = () => {
       <div className="task-components">
         <Public />
         <MostBet />
-        <Win1 />
+        {/* <Win1 /> */}
         <Ant />
 
         <Egg />
