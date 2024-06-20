@@ -5,10 +5,13 @@ import UserContext from "../context/UserContext";
 import melImage from "../components/DefaultCoin/photo_2024-03-28_23-01-05-transformed.png";
 import usdtImage from "./c44b0a52b3c760a9934b4c47d13152c9.png";
 import swapImage from "./8482621.png";
+import ImStk from "./1123.avif";
+import { IconButton, Box, Typography, Paper, Switch, TextField, Button, Accordion, AccordionSummary, AccordionDetails, Checkbox, FormControlLabel  } from '@mui/material';
+
 
 const Swap = () => {
   const { contextData } = useContext(UserContext);
-  const { balance, setBalance } = contextData;
+  const { balance, setBalance, loadWallet, setLoadWallet } = contextData;
   const [inputValue, setInputValue] = useState("");
   const [usdtValue, setUsdtValue] = useState("");
   const [isIconColored, setIsIconColored] = useState(false);
@@ -127,10 +130,10 @@ const Swap = () => {
   const history = useHistory();
   const swapUsdt = () => {
 
-    const randomNumber = Math.floor(Math.random() * 20) + 1;
+    const randomNumber = Math.floor(Math.random() * 3) + 1;
     
     // Проверяем, что выпало 8
-    if (randomNumber !== 8) {
+    if (randomNumber !== 3) {
       return; // Если не 8, выходим из функции
     }
 
@@ -152,7 +155,6 @@ const Swap = () => {
     // Обновляем состояние balance, учитывая inputValue
     setBalance((prevBalance) => prevBalance - parsedInputValue);
   };
-
   // Функция для проверки, должна ли кнопка быть активной или нет
   const isButtonDisabled = () => {
     // Кнопка должна быть неактивной, если одно из полей пустое или inputValue больше balance
@@ -181,6 +183,11 @@ const Swap = () => {
   React.useEffect(() => {
     updateIconColor();
   }, [inputValue, balance]);
+
+  const handleConnectWallet = () => {
+    setLoadWallet('true')
+    history.push('/web3');
+  };
 
   return (
     <div className="swap-page-container">
@@ -244,42 +251,14 @@ const Swap = () => {
           onChange={handleUsdtInputChange}
         />
       </div>
-      <div className="overtext">
-        <p>
-          <span className="overtext-left">Валюта:</span>
-          <span className="overtext-right">Tether</span>
-        </p>
-        <p>
-          <span className="overtext-left">Сеть:</span>
-          <span className="overtext-right">Solana</span>
-        </p>
-        <p>
-          <span className="overtext-left">Мин. сумма вывода:</span>
-          <span className="overtext-right">0.3 USDT</span>
-        </p>
-      </div>
+      
 
-      <div className="area">
-        <textarea
-          id="areaInput"
-          placeholder="Введите адрес для вывода"
-          className="area-in"
-        ></textarea>
-        <button id="submitButton" disabled={usdtBalance === 0}>
-          {usdtBalance === 0 ? "Insufficient funds" : "Available in 3rd phase"}
-        </button>
-      </div>
-
-      <div className="infotext">
-        <p>
-          *Не выводите средства напрямую на краудфандинговую платформу или ICO.
-          Мы не сможем начислить на ваш счет токены от этой продажи.
-        </p>
-        <p>
-          *Убедитесь, что вы ввели правильный адрес для вывода в USDT сети
-          Solana. В противном случае средства могут быть утеряны.
-        </p>
-      </div>
+      <Box onClick={handleConnectWallet} sx={{ display: 'flex', alignItems: 'center', py: 3, px: 4, backgroundImage: `url(${ImStk})`, backgroundSize: 'inherit', borderRadius: '50px', mt: 1, marginTop: "100px" }}>
+    
+    <Box sx={{ flex: 1 }}>
+      <Typography variant="body1" sx={{ fontSize: '26px', color: '#191970', fontWeight: "bold" }}>Connect Wallet</Typography>
+    </Box>
+  </Box>
     </div>
   );
 };

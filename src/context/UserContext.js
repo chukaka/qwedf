@@ -6,6 +6,7 @@ export default UserContext;
 
 export const UserProvider = ({ children }) => {
   const [selectedSkin, setSelectedSkin] = useState(null);
+  const [loadWallet, setLoadWallet] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const [skinChoose, setSkinChoose] = useState(() => {
     const skinChooseStore = localStorage.getItem("skinChoose");
@@ -102,6 +103,8 @@ export const UserProvider = ({ children }) => {
     setIsPressed:setIsPressed,
     selectedSkin:selectedSkin,
     setSelectedSkin:setSelectedSkin,
+    loadWallet: loadWallet,
+    setLoadWallet: setLoadWallet,
 
 
 

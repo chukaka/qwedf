@@ -9,6 +9,7 @@ import { UserProvider, useUserContext } from './context/UserContext'; // Имп�
 import Stars from './pages/Stars';
 import Swap from './pages/Swap';
 import CryptoReceive from './pages/CryptoReceive';
+import Web3 from './pages/Web3';
 
 function App() {
   const { contextData } = useUserContext(); // Получаем контекст
@@ -27,6 +28,7 @@ function App() {
           <Route component={Boost} path="/boost" exact />
           <Route component={Task} path="/task" exact />
           <Route component={CryptoReceive} path="/qr" exact />
+          <Route component={Web3} path="/web3" />
         </Switch>
       </Router>
     </div>
