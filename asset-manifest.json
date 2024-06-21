@@ -1,9 +1,8 @@
 {
   "files": {
     "main.css": "/qwedf/static/css/main.ca5b1add.css",
-    "main.js": "/qwedf/static/js/main.821a895d.js",
+    "main.js": "/qwedf/static/js/main.6d92f845.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
-    "static/media/IMG_0885-removebg-preview.png": "/qwedf/static/media/IMG_0885-removebg-preview.9fecf7f53689bebd1c88.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
     "static/media/atlas3.png": "/qwedf/static/media/atlas3.6a446b863db19f8ec9f2.png",
@@ -16,6 +15,7 @@
     "static/media/atlas3Img.png": "/qwedf/static/media/atlas3Img.2c79c0407efd705e8786.png",
     "static/media/pumpfun.png": "/qwedf/static/media/pumpfun.82720077c4569b4b0f53.png",
     "static/media/whalesImg.png": "/qwedf/static/media/whalesImg.9eb3f2e63184c0257b20.png",
+    "static/media/photo1718976680.jpeg": "/qwedf/static/media/photo1718976680.cb6ec6863c4c4e931153.jpeg",
     "static/media/sunflowerland.png": "/qwedf/static/media/sunflowerland.3302d35213892ee7ed3e.png",
     "static/media/whales.webp": "/qwedf/static/media/whales.10864398dbb14ecb66a6.webp",
     "static/media/debridgeImg.png": "/qwedf/static/media/debridgeImg.e15bd57ea16f084594cb.png",
@@ -47,10 +47,10 @@
     "static/media/1123.avif": "/qwedf/static/media/1123.717d89b84eafe3f66456.avif",
     "index.html": "/qwedf/index.html",
     "main.ca5b1add.css.map": "/qwedf/static/css/main.ca5b1add.css.map",
-    "main.821a895d.js.map": "/qwedf/static/js/main.821a895d.js.map"
+    "main.6d92f845.js.map": "/qwedf/static/js/main.6d92f845.js.map"
   },
   "entrypoints": [
     "static/css/main.ca5b1add.css",
-    "static/js/main.821a895d.js"
+    "static/js/main.6d92f845.js"
   ]
 }
