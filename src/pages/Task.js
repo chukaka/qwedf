@@ -23,7 +23,7 @@ const Task = () => {
         <Public />
         <MostBet />
         {/* <Win1 /> */}
-        {/* <Ant /> */}
+        <Ant />
 
         <Egg />
       </div>
