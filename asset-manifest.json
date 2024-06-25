@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/qwedf/static/css/main.ca5b1add.css",
-    "main.js": "/qwedf/static/js/main.6d92f845.js",
+    "main.js": "/qwedf/static/js/main.d9b65751.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
@@ -20,7 +20,6 @@
     "static/media/whales.webp": "/qwedf/static/media/whales.10864398dbb14ecb66a6.webp",
     "static/media/debridgeImg.png": "/qwedf/static/media/debridgeImg.e15bd57ea16f084594cb.png",
     "static/media/ton-new.png": "/qwedf/static/media/ton-new.f8d7bb175c6c0803bed0.png",
-    "static/media/photo1715189337-removebg-preview.png": "/qwedf/static/media/photo1715189337-removebg-preview.4754a63b785573ca1f00.png",
     "static/media/tether-usdt-logo.png": "/qwedf/static/media/tether-usdt-logo.c1d587669942a5e9bc47.png",
     "static/media/bybit.png": "/qwedf/static/media/bybit.c5a5e262246af277ec46.png",
     "static/media/avax.png": "/qwedf/static/media/avax.c053e2831244fd0e4b50.png",
@@ -32,6 +31,7 @@
     "static/media/raffle.png": "/qwedf/static/media/raffle.3f09056020c844c2fcec.png",
     "static/media/parcl.jpeg": "/qwedf/static/media/parcl.5379ba93226661fed233.jpeg",
     "static/media/staratlas.png": "/qwedf/static/media/staratlas.3f143c2aad28c5cad1de.png",
+    "static/media/tiktok.png": "/qwedf/static/media/tiktok.5c98b30b4c4bf3cfc9ae.png",
     "static/media/ecx.jpg": "/qwedf/static/media/ecx.ce739c6f9b5eb18c8058.jpg",
     "static/media/raydium.webp": "/qwedf/static/media/raydium.e034ef02d41ea8eded5f.webp",
     "static/media/8482621.png": "/qwedf/static/media/8482621.9c9389381ab245c5b6af.png",
@@ -47,10 +47,10 @@
     "static/media/1123.avif": "/qwedf/static/media/1123.717d89b84eafe3f66456.avif",
     "index.html": "/qwedf/index.html",
     "main.ca5b1add.css.map": "/qwedf/static/css/main.ca5b1add.css.map",
-    "main.6d92f845.js.map": "/qwedf/static/js/main.6d92f845.js.map"
+    "main.d9b65751.js.map": "/qwedf/static/js/main.d9b65751.js.map"
   },
   "entrypoints": [
     "static/css/main.ca5b1add.css",
-    "static/js/main.6d92f845.js"
+    "static/js/main.d9b65751.js"
   ]
 }
