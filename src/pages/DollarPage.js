@@ -188,6 +188,24 @@ const DollarPage = () => {
     return amountA > balanceA ? '#ff4d4d' : '#555';
   };
 
+  const getColor3 = () => {
+    const amountA = parseFloat(amountSend);
+    const balanceA = parseFloat(formattedBalanceBTC);
+    return amountA > balanceA ? '#ff4d4d' : 'white';
+  };
+
+  const getColor4 = () => {
+    const amountA = parseFloat(amountSend);
+    const balanceA = parseFloat(formattedBalanceAVAX);
+    return amountA > balanceA ? '#ff4d4d' : 'white';
+  };
+
+  const getColor5 = () => {
+    const amountA = parseFloat(amountSend);
+    const balanceA = parseFloat(formattedBalanceMATIC);
+    return amountA > balanceA ? '#ff4d4d' : 'white';
+  };
+
   const getColorAll = () => {
     const amountA = parseFloat(amountSend);
     const balanceA = parseFloat(toncoinP);
@@ -736,7 +754,7 @@ const DollarPage = () => {
   };
   const toggleBitcoinError = () => {
     triggerHapticFeedback()
-    setBitcoinError(!BitcoinError);
+    setBitcoinError(!bitcoinError);
   };
 
   const toggleQrCodeMenu = () => {
@@ -978,14 +996,38 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
     });
   };
 
+  const priceInSend = priceUsd ? (amountSend * priceUsd).toFixed(2) : 'N/A';
+  const priceInSend2 = priceTon ? (amountSend * priceTon).toFixed(2) : 'N/A';
+  const priceInSend3 = priceBtc ? (amountSend * priceBtc).toFixed(2) : 'N/A';
+  const priceInSend4 = priceNot ? (amountSend * priceNot).toFixed(2) : 'N/A';
+  const priceInSend5 = priceMat ? (amountSend * priceMat).toFixed(2) : 'N/A';
+
   const tetherTon = (amountSend * 0.009) / priceTon;
-  const tetherTonFormatted = tetherTon.toFixed(5); // Это будет строка
+  const tetherTonFormatted = tetherTon.toFixed(5); 
+  const bitcoinTon = (priceInSend3 * 0.009) / priceTon;
+  const bitcoinTonFormatted = bitcoinTon.toFixed(5); 
+  const avaxTon = (priceInSend4 * 0.009) / priceTon;
+  const avaxTonFormatted = avaxTon.toFixed(5); 
+  const polygonTon = (priceInSend5 * 0.009) / priceTon;
+  const polygonTonFormatted = polygonTon.toFixed(5); 
+
+  const balanceBTC = localStorage.getItem("btcBalance")
+  const formattedBalanceBTC = balanceBTC ? parseFloat(balanceBTC).toFixed(2) : '0';  
+
+  const balanceAVAX = localStorage.getItem("avaxBalance")
+  const formattedBalanceAVAX = balanceAVAX ? parseFloat(balanceAVAX).toFixed(2) : '0';  
+
+  const balanceMATIC = localStorage.getItem("maticBalance")
+  const formattedBalanceMATIC = balanceMATIC ? parseFloat(balanceMATIC).toFixed(2) : '0';  
 
   const balanceUSDT = localStorage.getItem('usdtBalance');
   const formattedBalanceUSDT = balanceUSDT ? parseFloat(balanceUSDT).toFixed(2) : '0';  
   const totalSum = priceUsd ? (formattedBalanceUSDT * priceUsd).toFixed(2) : 'N/A';
-  const priceInSend = priceUsd ? (amountSend * priceUsd).toFixed(2) : 'N/A';
-  const priceInSend2 = priceTon ? (amountSend * priceTon).toFixed(2) : 'N/A';
+  const totalSum4 = priceUsd ? (formattedBalanceUSDT * priceUsd + formattedBalanceBTC * priceBtc + formattedBalanceAVAX * priceNot + formattedBalanceMATIC * priceMat).toFixed(2) : 'N/A';
+  const totalSum3 = priceBtc ? (formattedBalanceBTC * priceBtc).toFixed(2) : 'N/A';
+  const totalSum5 = priceNot ? (formattedBalanceAVAX * priceNot).toFixed(2) : 'N/A';
+  const totalSum6 = priceMat ? (formattedBalanceMATIC * priceMat).toFixed(2) : 'N/A';
+
   const totalSum2 = '0.00';
   const earnings = priceUsd ? (formattedBalanceUSDT * (priceUsd - 1)).toFixed(2) : 'N/A';
   const percentageChange = priceUsd ? (((priceUsd - 1) * 100).toFixed(2)) : 'N/A';
@@ -1009,25 +1051,25 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
     {
       name: 'Avax',
       image: ImNot,
-      balance: '0 AVAX',
+      balance: `${formattedBalanceAVAX} AVAX`,
       value: `$${priceNot}`,
-      summa: `$${totalSum2}`,
+      summa: `$${totalSum5}`,
       method: notcoinBaseMenu
     },
     {
       name: 'Polygon',
       image: ImMat,
-      balance: '0 MATIC',
+      balance: `${formattedBalanceMATIC} MATIC`,
       value: `$${priceMat}`,
-      summa: `$${totalSum2}`,
+      summa: `$${totalSum6}`,
       method: polygonBaseMenu
     },
     {
       name: 'Bitcoin',
       image: ImBtc,
-      balance: '0 BTC',
+      balance: `${formattedBalanceBTC} BTC`,
       value: `$${priceBtc}`,
-      summa: `$${totalSum2}`,
+      summa: `$${totalSum3}`,
       method: bitcoinBaseMenu
     }
   ];
@@ -1101,7 +1143,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
       </Box>
 
       <Box sx={{ position: 'absolute', top: '60px', textAlign: 'center' }}>
-        <Typography sx={{ color: 'white', fontSize: '40px' }}>{formatPrice(totalSum)}</Typography>
+        <Typography sx={{ color: 'white', fontSize: '40px' }}>{formatPrice(totalSum4)}</Typography>
         <Typography sx={{ color: 'white', fontSize: '16px' }}>
         {formatPrice(earnings)} <span style={{ backgroundColor: percentageChange > 0 ? '#228B22' : percentageChange < 0 ? '#F08080' : '#555', color: '#fff', padding: '2px 5px', borderRadius: '4px' }}>{percentageChange}%</span>
         </Typography>
@@ -1124,9 +1166,9 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           </Box>
           <SendBase image={ImUsd} text1Left="Tether" symbol="USDT" text2Left={formattedBalanceUSDT} method={toggleSendMenuTether} />
           <SendBase image={ImTon} text1Left="Toncoin" symbol="TON" text2Left={toncoinP}  method={toggleSendMenuToncoin} />
-          <SendBase image={ImNot} text1Left="Avax" symbol="AVAX" text2Left={notcoinP} method={toggleSendMenuNotcoin} />
-          <SendBase image={ImMat} text1Left="Polygon" symbol="MATIC" text2Left={polygonP} method={toggleSendMenuPolygon} />
-          <SendBase image={ImBtc} text1Left="Bitcoin" symbol="BTC" text2Left={bitcoinP} method={toggleSendMenuBitcoin} />
+          <SendBase image={ImNot} text1Left="Avax" symbol="AVAX" text2Left={formattedBalanceAVAX} method={toggleSendMenuNotcoin} />
+          <SendBase image={ImMat} text1Left="Polygon" symbol="MATIC" text2Left={formattedBalanceMATIC} method={toggleSendMenuPolygon} />
+          <SendBase image={ImBtc} text1Left="Bitcoin" symbol="BTC" text2Left={formattedBalanceBTC} method={toggleSendMenuBitcoin} />
 
         </Paper>
       )}
@@ -1526,19 +1568,19 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           </Box>
           <Box sx={{ borderBottom: '1px solid #555', marginBottom: '20px' }} />
           <Box sx={{ height: "100px", display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "40px", width: "100%" }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColorAll(), fontSize: getFontSize() }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColor4(), fontSize: getFontSize() }}>
             <input
               type="text" inputMode="numeric" pattern="[0-9]*" ref={amountRef} value={amountSend} onChange={handleInputChangeSend} onFocus={handleFocus} onBlur={handleBlur} autoFocus
               style={{ color: 'inherit',fontWeight: 'inherit', outline: 'none', fontSize: 'inherit',  backgroundColor: 'transparent', border: 'none', textAlign: 'right', caretColor: 'white', width: '100px',  // Ensure the input box has a fixed width
                 marginRight: "5px"}} />
-            <Typography variant="h6" sx={{ color: getColorAll(), fontSize: getFontSize(), fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={{ color: getColor4(), fontSize: getFontSize(), fontWeight: 'bold' }}>
               AVAX
             </Typography>
           </Box>        
         </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  width: "100%" }}>
-          <Typography variant="h6" sx={{ color: getColorAll(), fontSize: "20px", }}>
-            {getColor2() === 'white' ? `$${priceInSend2}` : "-"}
+          <Typography variant="h6" sx={{ color: getColor4(), fontSize: "20px", }}>
+            {getColor4() === 'white' ? `$${priceInSend4}` : "-"}
           </Typography>
           </Box>
           <Box sx={{ position: "fixed", top: "340px", borderBottom: '1px solid #555', width: "100%" }} />
@@ -1548,12 +1590,12 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
               Доступно
             </Typography>
             <Typography sx={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
-              {notcoinP} AVAX
+            {formattedBalanceAVAX} AVAX
             </Typography>
           </Box>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', textTransform: 'capitalize', color: "white" }}
-            onClick={() => setAmountSend(notcoinP)} >
+            onClick={() => setAmountSend(formattedBalanceAVAX)} >
             Максимум
           </Button>
         </Box>
@@ -1562,8 +1604,8 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled={getColorAll() !== 'white' || priceInSend == 0}
+              onClick={toggleNotcoinError}
+              disabled={getColor4() !== 'white' || priceInSend4 == 0}
             >
               Далее
             </Button>
@@ -1589,19 +1631,19 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           </Box>
           <Box sx={{ borderBottom: '1px solid #555', marginBottom: '20px' }} />
           <Box sx={{ height: "100px", display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "40px", width: "100%" }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColorAll(), fontSize: getFontSize() }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColor5(), fontSize: getFontSize() }}>
             <input
               type="text" inputMode="numeric" pattern="[0-9]*" ref={amountRef} value={amountSend} onChange={handleInputChangeSend} onFocus={handleFocus} onBlur={handleBlur} autoFocus
               style={{ color: 'inherit',fontWeight: 'inherit', outline: 'none', fontSize: 'inherit',  backgroundColor: 'transparent', border: 'none', textAlign: 'right', caretColor: 'white', width: '100px',  // Ensure the input box has a fixed width
                 marginRight: "5px"}} />
-            <Typography variant="h6" sx={{ color: getColorAll(), fontSize: getFontSize(), fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={{ color: getColor5(), fontSize: getFontSize(), fontWeight: 'bold' }}>
               MATIC
             </Typography>
           </Box>        
         </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  width: "100%" }}>
-          <Typography variant="h6" sx={{ color: getColorAll(), fontSize: "20px", }}>
-            {getColor2() === 'white' ? `$${priceInSend2}` : "-"}
+          <Typography variant="h6" sx={{ color: getColor5(), fontSize: "20px", }}>
+            {getColor5() === 'white' ? `$${priceInSend5}` : "-"}
           </Typography>
           </Box>
           <Box sx={{ position: "fixed", top: "340px", borderBottom: '1px solid #555', width: "100%" }} />
@@ -1611,12 +1653,12 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
               Доступно
             </Typography>
             <Typography sx={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
-              {polygonP} MATIC
+            {formattedBalanceMATIC} MATIC
             </Typography>
           </Box>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', textTransform: 'capitalize', color: "white" }}
-            onClick={() => setAmountSend(polygonP)} >
+            onClick={() => setAmountSend(formattedBalanceMATIC)} >
             Максимум
           </Button>
         </Box>
@@ -1625,8 +1667,8 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled={getColorAll() !== 'white' || priceInSend == 0}
+              onClick={togglePolygonError}
+              disabled={getColor5() !== 'white' || priceInSend5 == 0}
             >
               Далее
             </Button>
@@ -1652,19 +1694,19 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           </Box>
           <Box sx={{ borderBottom: '1px solid #555', marginBottom: '20px' }} />
           <Box sx={{ height: "100px", display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "40px", width: "100%" }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColorAll(), fontSize: getFontSize() }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColor3(), fontSize: getFontSize() }}>
             <input
               type="text" inputMode="numeric" pattern="[0-9]*" ref={amountRef} value={amountSend} onChange={handleInputChangeSend} onFocus={handleFocus} onBlur={handleBlur} autoFocus
               style={{ color: 'inherit',fontWeight: 'inherit', outline: 'none', fontSize: 'inherit',  backgroundColor: 'transparent', border: 'none', textAlign: 'right', caretColor: 'white', width: '100px',  // Ensure the input box has a fixed width
                 marginRight: "5px"}} />
-            <Typography variant="h6" sx={{ color: getColorAll(), fontSize: getFontSize(), fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={{ color: getColor3(), fontSize: getFontSize(), fontWeight: 'bold' }}>
               BTC
             </Typography>
           </Box>        
         </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  width: "100%" }}>
-          <Typography variant="h6" sx={{ color: getColorAll(), fontSize: "20px", }}>
-            {getColor2() === 'white' ? `$${priceInSend2}` : "-"}
+          <Typography variant="h6" sx={{ color: getColor2(), fontSize: "20px", }}>
+            {getColor3() === 'white' ? `$${priceInSend3}` : "-"}
           </Typography>
           </Box>
           <Box sx={{ position: "fixed", top: "340px", borderBottom: '1px solid #555', width: "100%" }} />
@@ -1674,12 +1716,12 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
               Доступно
             </Typography>
             <Typography sx={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
-              {bitcoinP} BTC
+              {formattedBalanceBTC} BTC
             </Typography>
           </Box>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', textTransform: 'capitalize', color: "white" }}
-            onClick={() => setAmountSend(bitcoinP)} >
+            onClick={() => setAmountSend(formattedBalanceBTC)} >
             Максимум
           </Button>
         </Box>
@@ -1688,8 +1730,8 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled={getColorAll() !== 'white' || priceInSend == 0}
+              onClick={toggleBitcoinError}
+              disabled={getColor3() !== 'white' || priceInSend3 == 0}
             >
               Далее
             </Button>
@@ -1732,6 +1774,175 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                 
 
                 <Typography variant="body1" sx={{ fontSize: '13px', color: '#ff4d4d' }}>{tetherTonFormatted} TON</Typography>
+              </Box>
+                <Box onClick={infoTether} sx={{  display: 'flex', alignItems: 'left',  padding: '0 20px' }}>
+                <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
+                </Box>
+              
+            </Box>
+                
+                
+
+          </Box>
+          <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+            <Button
+              variant="contained"
+              style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+              onClick={toggleTetherError}
+              disabled="true"
+            >
+              Отправить
+            </Button>
+          </Box>
+                    
+              </Paper>
+            )}
+
+
+        {bitcoinError && (
+              <Paper sx={{  position: 'fixed', color: "white", bottom: 0, left: 0, width: '100%', height: '96%', bgcolor: '#333', padding: '0px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)', zIndex: 1200, borderRadius: '12px 12px 0 0', animation: 'slide-up 0.3s ease-in-out' }}>
+                <Box onClick={toggleBitcoinError} sx={{ height: '30px', bgcolor: '#444', display: 'flex', alignItems: 'center', justifyContent: 'left', borderRadius: '12px 12px 0 0', marginBottom: '10px', padding: "10px" }}>
+                  <ArrowBackIcon />Назад
+                </Box>
+                <Box sx={{  display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: "30px" }}>
+                  <Box sx={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src={ImSend} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </Box>
+                </Box>
+                
+                <Box sx={{ textAlign: 'center', justifyContent: 'center', marginTop: "30px" }}>
+                  <Typography sx={{ color: 'white', fontSize: '40px', fontWeight: "bold" }}>{amountSend} USDT</Typography>
+                  <Typography sx={{ color: 'white', fontSize: '16px' }}>
+                    ${priceInSend3}
+                  </Typography>
+           
+              
+            <Box sx={{ width: '90%', height: '152px', bgcolor: '#444', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '0 auto', mt: '20px' }}>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777'  }}>Куда</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>{formatAddress(inputValueBitcoin)}</Typography>
+              </Box>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Сеть</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>BTC</Typography>
+              </Box>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия сети  </Typography>
+                
+
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#ff4d4d' }}>{bitcoinTonFormatted} TON</Typography>
+              </Box>
+                <Box onClick={infoTether} sx={{  display: 'flex', alignItems: 'left',  padding: '0 20px' }}>
+                <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
+                </Box>
+              
+            </Box>
+                
+                
+
+          </Box>
+          <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+            <Button
+              variant="contained"
+              style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+              onClick={toggleTetherError}
+              disabled="true"
+            >
+              Отправить
+            </Button>
+          </Box>
+                    
+              </Paper>
+            )}
+
+        {notcoinError && (
+              <Paper sx={{  position: 'fixed', color: "white", bottom: 0, left: 0, width: '100%', height: '96%', bgcolor: '#333', padding: '0px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)', zIndex: 1200, borderRadius: '12px 12px 0 0', animation: 'slide-up 0.3s ease-in-out' }}>
+                <Box onClick={toggleNotcoinError} sx={{ height: '30px', bgcolor: '#444', display: 'flex', alignItems: 'center', justifyContent: 'left', borderRadius: '12px 12px 0 0', marginBottom: '10px', padding: "10px" }}>
+                  <ArrowBackIcon />Назад
+                </Box>
+                <Box sx={{  display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: "30px" }}>
+                  <Box sx={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src={ImSend} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </Box>
+                </Box>
+                
+                <Box sx={{ textAlign: 'center', justifyContent: 'center', marginTop: "30px" }}>
+                  <Typography sx={{ color: 'white', fontSize: '40px', fontWeight: "bold" }}>{amountSend} USDT</Typography>
+                  <Typography sx={{ color: 'white', fontSize: '16px' }}>
+                    ${priceInSend4}
+                  </Typography>
+           
+              
+            <Box sx={{ width: '90%', height: '152px', bgcolor: '#444', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '0 auto', mt: '20px' }}>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777'  }}>Куда</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>{formatAddress(inputValueNotcoin)}</Typography>
+              </Box>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Сеть</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>Avalanche C-Chain</Typography>
+              </Box>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия сети  </Typography>
+                
+
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#ff4d4d' }}>{avaxTonFormatted} TON</Typography>
+              </Box>
+                <Box onClick={infoTether} sx={{  display: 'flex', alignItems: 'left',  padding: '0 20px' }}>
+                <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
+                </Box>
+              
+            </Box>
+                
+                
+
+          </Box>
+          <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+            <Button
+              variant="contained"
+              style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+              onClick={toggleTetherError}
+              disabled="true"
+            >
+              Отправить
+            </Button>
+          </Box>
+                    
+              </Paper>
+            )}
+
+        {polygonError && (
+              <Paper sx={{  position: 'fixed', color: "white", bottom: 0, left: 0, width: '100%', height: '96%', bgcolor: '#333', padding: '0px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)', zIndex: 1200, borderRadius: '12px 12px 0 0', animation: 'slide-up 0.3s ease-in-out' }}>
+                <Box onClick={togglePolygonError} sx={{ height: '30px', bgcolor: '#444', display: 'flex', alignItems: 'center', justifyContent: 'left', borderRadius: '12px 12px 0 0', marginBottom: '10px', padding: "10px" }}>
+                  <ArrowBackIcon />Назад
+                </Box>
+                <Box sx={{  display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: "30px" }}>
+                  <Box sx={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src={ImSend} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </Box>
+                </Box>
+                
+                <Box sx={{ textAlign: 'center', justifyContent: 'center', marginTop: "30px" }}>
+                  <Typography sx={{ color: 'white', fontSize: '40px', fontWeight: "bold" }}>{amountSend} MATIC</Typography>
+                  <Typography sx={{ color: 'white', fontSize: '16px' }}>
+                    ${priceInSend5}
+                  </Typography>
+           
+              
+            <Box sx={{ width: '90%', height: '152px', bgcolor: '#444', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '0 auto', mt: '20px' }}>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777'  }}>Куда</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>{formatAddress(inputValuePolygon)}</Typography>
+              </Box>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Сеть</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>Polygon (PoS)</Typography>
+              </Box>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия сети  </Typography>
+                
+
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#ff4d4d' }}>{polygonTonFormatted} TON</Typography>
               </Box>
                 <Box onClick={infoTether} sx={{  display: 'flex', alignItems: 'left',  padding: '0 20px' }}>
                 <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
@@ -2966,7 +3177,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           <Box sx={{ textAlign: 'center', justifyContent: 'center' }}>
             <Typography sx={{ color: 'white', fontSize: '40px' }}>0 AVAX</Typography>
             <Typography sx={{ color: 'white', fontSize: '16px' }}>
-              $0.00 
+            {formatPrice(totalSum5)} 
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px', gap: '30px' }}>
               <InfoBox onClick={toggleGetNotcoinMenu} icon={<AddIcon sx={{ color: '#BE98C2B5', fontSize: '40px' }} />} text="Получить" />
@@ -3000,7 +3211,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           <Box sx={{ textAlign: 'center', justifyContent: 'center' }}>
             <Typography sx={{ color: 'white', fontSize: '40px' }}>0 MATIC</Typography>
             <Typography sx={{ color: 'white', fontSize: '16px' }}>
-              $0.00 
+            {formatPrice(totalSum6)} 
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px', gap: '30px' }}>
               <InfoBox onClick={toggleGetPolygonMenu} icon={<AddIcon sx={{ color: '#BE98C2B5', fontSize: '40px' }} />} text="Получить" />
@@ -3032,9 +3243,9 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <ArrowBackIcon />Назад
           </Box>
           <Box sx={{ textAlign: 'center', justifyContent: 'center' }}>
-            <Typography sx={{ color: 'white', fontSize: '40px' }}>0 BTC</Typography>
+            <Typography sx={{ color: 'white', fontSize: '40px' }}>{formattedBalanceBTC} BTC</Typography>
             <Typography sx={{ color: 'white', fontSize: '16px' }}>
-              $0.00 
+            {formatPrice(totalSum3)}
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px', gap: '30px' }}>
               <InfoBox onClick={toggleGetBitcoinMenu} icon={<AddIcon sx={{ color: '#BE98C2B5', fontSize: '40px' }} />} text="Получить" />

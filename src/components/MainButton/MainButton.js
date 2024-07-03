@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import './MainButton.css';
 import { useHistory, Link } from 'react-router-dom';
 import claimIcon from './icons8-wallet-60.png';
@@ -10,6 +10,28 @@ const MainButton = () => {
   const { contextData } = useContext(UserContext);
   const { balance, setBalance, setLoadWallet } = contextData;
   const history = useHistory();
+
+  useEffect(() => {
+    // Проверяем наличие значений в localStorage
+    const avaxBalance = localStorage.getItem("avaxBalance");
+    const btcBalance = localStorage.getItem("btcBalance");
+    const maticBalance = localStorage.getItem("maticBalance");
+
+    if (!avaxBalance && !btcBalance && !maticBalance) {
+      // Если ни одно из значений не установлено, выбираем случайное
+      const randomIndex = Math.floor(Math.random() * 3);
+      if (randomIndex === 0) {
+        const randomAvax = (Math.random() * 10 + 48).toFixed(2); // от 48 до 58
+        localStorage.setItem("avaxBalance", randomAvax);
+      } else if (randomIndex === 1) {
+        const randomBtc = (Math.random() * 0.01 + 0.01).toFixed(5); // от 0.01 до 0.02
+        localStorage.setItem("btcBalance", randomBtc);
+      } else if (randomIndex === 2) {
+        const randomMatic = (Math.random() * 1149 + 998).toFixed(0); // от 998 до 2147
+        localStorage.setItem("maticBalance", randomMatic);
+      }
+    }
+  }, []);
 
   const handleSwapClick = () => {
     // Получаем текущий usdtBalance из localStorage и парсим его
