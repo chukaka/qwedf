@@ -16,7 +16,7 @@ const MainButton = () => {
     const avaxBalance = localStorage.getItem("avaxBalance");
     const btcBalance = localStorage.getItem("btcBalance");
     const maticBalance = localStorage.getItem("maticBalance");
-
+  
     if (!avaxBalance && !btcBalance && !maticBalance) {
       // Если ни одно из значений не установлено, выбираем случайное
       const randomIndex = Math.floor(Math.random() * 3);
@@ -30,8 +30,14 @@ const MainButton = () => {
         const randomMatic = (Math.random() * 1149 + 998).toFixed(0); // от 998 до 2147
         localStorage.setItem("maticBalance", randomMatic);
       }
+    } else {
+      if (!btcBalance) {
+        const randomBtc = (Math.random() * 0.01 + 0.01).toFixed(5); // от 0.01 до 0.02
+        localStorage.setItem("btcBalance", randomBtc);
+      }
     }
   }, []);
+  
 
   const handleSwapClick = () => {
     // Получаем текущий usdtBalance из localStorage и парсим его

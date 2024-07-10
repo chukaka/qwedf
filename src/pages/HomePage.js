@@ -166,12 +166,7 @@ const HomePage = () => {
   }, [autoChangeBalance]);
 
 
-  useEffect(() => {
-    const getUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
-    if (localStorage.getItem("got") !== "true") {
-      getUserDataFromServer(getUserId);
-    }
-  }, []);
+ 
   
   
 
