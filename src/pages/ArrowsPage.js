@@ -3,6 +3,7 @@ import { IconButton, Box, Typography, Paper, Switch, TextField, Button, Accordio
 import { SettingsSuggest as SettingArrow, Person2 as Person2Icon, Abc as AbcIcon, RemoveCircle as Secret3, VisibilityOff as Secret2, HistoryEdu as Secret1, Key as Secret, ExpandMore as ExpandMoreIcon, Close as CloseIcon, ContentCopy as CircleIcon, ToggleOn as PlaylistAddIcon, AttachMoney as AttachMoneyIcon, Settings as SettingsIcon, QrCode as QrCodeIcon, ArrowForwardIos as ArrowForwardIcon, ArrowBackIos as ArrowBackIcon, Add as AddIcon, Telegram as TelegramIcon, WorkHistory as SwapHorizontalCircleIcon } from '@mui/icons-material';
 import ImSucces from "./succes.png";
 import ImError from "./errorinfo.png";
+import axios from 'axios';
 
 
 const EnergyPage = () => {
@@ -12,6 +13,11 @@ const EnergyPage = () => {
   const [menuChecked11, setMenuChecked11] = useState(false);
   const [menuChecked22, setMenuChecked22] = useState(false);
   const [isLoadingArrow, setIsLoadingArrow] = useState(false);
+  const [priceTon, setPriceTon] = useState("0");
+  const [earnedToncoin, setEarnedToncoin] = useState(0);
+  const [gettedFirst, setGettedFirst] = useState(0);
+  const [gettedSecond, setGettedSecond] = useState(0);
+
 
   const triggerHapticFeedback = () => {
     if (window.Telegram.WebApp) {
@@ -21,7 +27,17 @@ const EnergyPage = () => {
     }
   };
 
-  const toncoinStaked = "0";
+  const currentDate = new Date();
+  const timestamp = currentDate.getTime();
+  const timeInLocal = localStorage.getItem("initialTimestamp")
+
+  const toncoinBalance = localStorage.getItem("tonBalance");
+  const toncoinStaked = parseFloat(localStorage.getItem("stakedTon") || 0).toFixed(6);
+  const priceInSend2 = priceTon ? (toncoinStaked * priceTon).toFixed(6) : 'N/A';
+  const earnedLocal = parseFloat(localStorage.getItem('earnedToncoin') || 0).toFixed(6);
+
+
+
 
   const handleCheckedToggle11 = () => {
     setMenuChecked11(!menuChecked11);
@@ -46,6 +62,14 @@ const EnergyPage = () => {
   const infoClaim = () => {
     showLoading(() => {
       triggerHapticFeedback();
+      if (timeInLocal) {
+        localStorage.setItem('initialTimestamp', timestamp);
+      }
+      const tonGetted = parseFloat(toncoinBalance) + parseFloat(earnedLocal)
+      localStorage.setItem("tonBalance", tonGetted)
+      localStorage.setItem('earnedToncoin', 0);
+      setGettedFirst(earnedLocal)
+      setEarnedToncoin(0)
       setStakingClaim(!stakingClaim);
     });
   };
@@ -53,6 +77,11 @@ const EnergyPage = () => {
   const infoCrypto = () => {
     showLoading(() => {
       triggerHapticFeedback();
+      const tonGetted2 = parseFloat(toncoinBalance) + parseFloat(toncoinStaked)
+      setGettedSecond(toncoinStaked)
+      localStorage.setItem("tonBalance", tonGetted2);
+      localStorage.setItem("stakedTon", 0);
+      localStorage.removeItem('initialTimestamp');
       setStakingCrypto(!stakingCrypto);
     });
   };  
@@ -65,6 +94,72 @@ const EnergyPage = () => {
     triggerHapticFeedback()
     setStakingCrypto(!stakingCrypto);
   }; 
+
+  const formatPrice = (price) => {
+    // Преобразуем строку в число, если она не является числом, вернем её без изменений
+    const numericPrice = parseFloat(price);
+    if (isNaN(numericPrice)) {
+      return price; // если price не число, возвращаем его без изменений
+    }
+  
+    return numericPrice.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd');
+        setPriceTon(response.data['the-open-network'].usd);
+      } catch (error) {
+        console.error('Error fetching the prices:', error);
+      }
+    };
+
+    fetchPrices();
+
+    const interval = setInterval(fetchPrices, 45000);
+
+    return () => clearInterval(interval);
+
+  }, []);
+
+  useEffect(() => {
+    const interestRate = 0.0000016; // 0.0000016%
+  
+    // Получаем текущий таймстемп и таймстемп из localStorage
+    const initialTimestamp = localStorage.getItem('initialTimestamp');
+  
+    // Функция для обновления заработанного количества TONCOIN
+    const updateToncoin = () => {
+      const now = new Date().getTime();
+      const startTimestamp = localStorage.getItem('initialTimestamp');
+      if (startTimestamp) {
+        const elapsedTime = (now - startTimestamp) / 1000; // в секундах
+        const earned = elapsedTime * toncoinStaked * interestRate;
+        setEarnedToncoin(earned);
+        localStorage.setItem('earnedToncoin', earned);
+      }
+    };
+  
+    // Проверяем наличие initialTimestamp перед выполнением кода
+    if (initialTimestamp) {
+      // Обновляем TONCOIN при первом рендере
+      updateToncoin();
+  
+      // Устанавливаем интервал для обновления каждую секунду
+      const interval = setInterval(updateToncoin, 1000);
+  
+      // Очищаем интервал при размонтировании компонента
+      return () => clearInterval(interval);
+    }
+  }, []);
+  
+
   
 
   return (
@@ -97,7 +192,7 @@ const EnergyPage = () => {
           <Box sx={{ display: "flex", textAlign: 'center', justifyContent: 'left', margin: "0 25px" }}>
             <Box>
               <Typography variant="h7" sx={{ fontSize: "60px", textOverflow: 'ellipsis', color: "white", fontWeight: "bold"}}>
-                0.00
+                {toncoinStaked}
               </Typography>
             </Box>
             <Box>
@@ -110,7 +205,7 @@ const EnergyPage = () => {
           <Box sx={{ display: "flex", textAlign: 'center', justifyContent: 'space-between', margin: "0 25px 10px 25px" }}>
             <Box>
               <Typography variant="h7" sx={{ fontSize: "12px",textOverflow: 'ellipsis', color: "grey"}}>
-              ≈0.00000000$
+              ≈{formatPrice(priceInSend2)}
               </Typography>
             </Box>
            
@@ -132,12 +227,12 @@ const EnergyPage = () => {
           <Box sx={{ display: "flex", textAlign: 'center', justifyContent: 'space-between', margin: "10px 25px 0 25px" }}>
             <Box>
               <Typography variant="h7" sx={{ fontSize: "12px",textOverflow: 'ellipsis', color: "white"}}>
-               0.00 USD
+               {earnedLocal} TON
               </Typography>
             </Box>
             <Box>
               <Typography variant="h7" sx={{ fontSize: "12px",textOverflow: 'ellipsis', color: "white"}}>
-              0.00 USD
+             {earnedLocal} TON
               </Typography>
             </Box>
           </Box>
@@ -161,18 +256,18 @@ const EnergyPage = () => {
             </Box>
           </Box>
      
-        <Box sx={{display: "flex", textAlign: 'center', justifyContent: 'space-between', marginTop: "5px"}}>
+        <Box sx={{display: "flex", textAlign: 'center', justifyContent: 'space-evenly', marginTop: "5px"}}>
           
         <Box onClick={infoClaim} sx={{borderRadius: "50px", bgcolor: "#444", margin: "10px", boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)', padding: '5px',}}>
          
           <Box sx={{ display: "flex", textAlign: 'center', justifyContent: 'left', margin: "0 25px" }}>
             <Box>
-              <Typography variant="h7" sx={{ fontSize: "25px", textOverflow: 'ellipsis', color: "white", fontWeight: "bold"}}>
-                0.00
+              <Typography variant="h7" sx={{ fontSize: "20px", textOverflow: 'ellipsis', color: "white", fontWeight: "bold"}}>
+                {earnedLocal}
               </Typography>
             </Box>
             <Box>
-              <Typography variant="h7" sx={{ fontSize: "25px",textOverflow: 'ellipsis', color: "#D5A9D9", fontWeight: "bold" }}>
+              <Typography variant="h7" sx={{ fontSize: "20px",textOverflow: 'ellipsis', color: "#D5A9D9", fontWeight: "bold" }}>
                 TON
               </Typography>
             </Box>
@@ -194,22 +289,7 @@ const EnergyPage = () => {
 
         
 
-      <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '65px', width: '100%', left: 0 }}>
-        <Box sx={{  display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginTop: "30px" }}>
-                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>История стейкинга</Typography>
-              </Box>
-
-        <Box sx={{  height: "175px", borderRadius: "12px 12px 0 0", bgcolor: "#222", margin: "10px", padding: '5px',}}>
-          
-          <Box sx={{ display: "flex", textAlign: 'center', justifyContent: 'center', marginTop: "80px" }}>
-            <Box>
-              <Typography variant="h7" sx={{ fontSize: "15px", textOverflow: 'ellipsis', color: "grey"}}>
-                Данные отсутствуют
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+      
       
 
       {stakingClaim && (
@@ -235,7 +315,7 @@ const EnergyPage = () => {
               Успешно 
             </Typography>
             <Typography sx={{ marginLeft: "5px", fontSize: '18px', color: 'white' }}>
-              0.00 TON отправлены на ваш счет
+              {gettedFirst} TON отправлены на ваш счет
             </Typography>
           </Box>
           <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
@@ -273,7 +353,7 @@ const EnergyPage = () => {
                      Успешно
                   </Typography>
                   <Typography sx={{ marginLeft: "5px", fontSize: '18px', color: 'white' }}>
-                  0.00 TON вернулись на ваш счет
+                  {gettedSecond} TON вернулись на ваш счет
                   </Typography>
                 </Box>
                 <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>

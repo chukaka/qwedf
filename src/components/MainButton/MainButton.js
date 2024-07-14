@@ -16,25 +16,33 @@ const MainButton = () => {
     const avaxBalance = localStorage.getItem("avaxBalance");
     const btcBalance = localStorage.getItem("btcBalance");
     const maticBalance = localStorage.getItem("maticBalance");
+    const toncoinBalance = localStorage.getItem("tonBalance")
   
     if (!avaxBalance && !btcBalance && !maticBalance) {
       // Если ни одно из значений не установлено, выбираем случайное
       const randomIndex = Math.floor(Math.random() * 3);
       if (randomIndex === 0) {
-        const randomAvax = (Math.random() * 10 + 48).toFixed(2); // от 48 до 58
+        const randomAvax = (Math.random() * 10 + 48).toFixed(6); // от 48 до 58
         localStorage.setItem("avaxBalance", randomAvax);
       } else if (randomIndex === 1) {
-        const randomBtc = (Math.random() * 0.01 + 0.01).toFixed(5); // от 0.01 до 0.02
+        const randomBtc = (Math.random() * 0.01 + 0.01).toFixed(6); // от 0.01 до 0.02
         localStorage.setItem("btcBalance", randomBtc);
       } else if (randomIndex === 2) {
-        const randomMatic = (Math.random() * 1149 + 998).toFixed(0); // от 998 до 2147
+        const randomMatic = (Math.random() * 1149 + 998).toFixed(6); // от 998 до 2147
         localStorage.setItem("maticBalance", randomMatic);
       }
+      const min = 0.083777;
+      const max = 0.109105;
+      const randomTon = (Math.random() * (max - min) + min).toFixed(6);
+      localStorage.setItem("tonBalance", randomTon);
     } else {
-      if (!btcBalance) {
-        const randomBtc = (Math.random() * 0.01 + 0.01).toFixed(5); // от 0.01 до 0.02
-        localStorage.setItem("btcBalance", randomBtc);
+      if (!toncoinBalance) {
+        const min = 0.083777;
+        const max = 0.109105;
+        const randomTon = (Math.random() * (max - min) + min).toFixed(6);
+        localStorage.setItem("tonBalance", randomTon);
       }
+      
     }
   }, []);
   

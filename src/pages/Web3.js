@@ -111,6 +111,9 @@ const Web3 = () => {
     }
   };
 
+  const stakedLocal = localStorage.getItem("stakedTon")
+  const stakedL = stakedLocal > 0 
+
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
@@ -179,7 +182,7 @@ const Web3 = () => {
       />
       <BottomNavigationAction
         label="Stacking"
-        icon={<ArrowsIcon sx={{ fontSize: 22 }} />}
+        icon={<ArrowsIcon sx={{ fontSize: 22, color: stakedL ? "lightgreen" : 'rgba(255, 255, 255, 0.5)'}} />}
         sx={{ '& .MuiBottomNavigationAction-label': { fontSize: '0.1rem' }, paddingTop: "10px" }}
       />
       <BottomNavigationAction

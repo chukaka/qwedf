@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { IconButton, Box, Typography, Paper, Switch, TextField, Button, Accordion, AccordionSummary, AccordionDetails, Checkbox, FormControlLabel  } from '@mui/material';  
 import ImTon from "./toncoin_ton_logo_c5fb8b4302.png";
+import ImSucces from "./succes.png";
 import ImNot from "./avax.png";
 import ImUsd from "./tether-usdt-logo.png";
 import ImMat from "./matic-logo.png";
@@ -89,7 +90,12 @@ const DollarPage = () => {
     Bitcoin: true
   });
 
- 
+  const currentDate = new Date();
+  const timestamp = currentDate.getTime();
+  const initialTimestamp = localStorage.getItem('initialTimestamp');
+
+
+  const [isLoadingArrow, setIsLoadingArrow] = useState(false);
 
   const [priceUsd, setPriceUsd] = useState("0");
   const [priceTon, setPriceTon] = useState("0");
@@ -105,7 +111,14 @@ const DollarPage = () => {
   const [inputValuePolygon, setInputValuePolygon] = useState('');
   const [inputValueBitcoin, setInputValueBitcoin] = useState('');
 
+  const [tetherComission, setTetherComission] = useState(false);
+  const [toncoinComission, setToncoinComission] = useState(false);
+  const [avaxComission, setAvaxComission] = useState(false);
+  const [polygonComission, setPolygonComission] = useState(false);
+  const [bitcoinComission, setBitcoinComission] = useState(false);
   const [infoTetherUp, setInfoTetherUp] = useState(false);
+  const [infoApply1, setInfoApply1] = useState(false);
+  const [infoApply2, setInfoApply2] = useState(false);
   const [infoStakingUp, setInfoStakingUp] = useState(false);
   const [infoDelite, setInfoDelite] = useState(false);
 
@@ -184,8 +197,8 @@ const DollarPage = () => {
 
   const getColor2 = () => {
     const amountA = parseFloat(amountSend);
-    const balanceA = parseFloat(formattedBalanceUSDT);
-    return amountA > balanceA ? '#ff4d4d' : '#555';
+    const balanceA = parseFloat(formattedBalanceTON);
+    return amountA > balanceA ? '#ff4d4d' : 'white';
   };
 
   const getColor3 = () => {
@@ -208,7 +221,7 @@ const DollarPage = () => {
 
   const getColorAll = () => {
     const amountA = parseFloat(amountSend);
-    const balanceA = parseFloat(toncoinP);
+    const balanceA = parseFloat(formattedBalanceTON);
     return amountA > balanceA ? '#ff4d4d' : 'white';
   };
 
@@ -418,6 +431,14 @@ const DollarPage = () => {
       });
   };
 
+  const showLoading = (callback) => {
+    setIsLoadingArrow(true);
+    setTimeout(() => {
+      setIsLoadingArrow(false);
+      callback();
+    }, 2000);
+  };
+
   const toggleBuyCoinbase = () => {
     triggerHapticFeedback();
     window.location.href = 'https://www.coinbase.com/login';
@@ -431,6 +452,44 @@ const DollarPage = () => {
     window.location.href = 'https://www.bybit.com/uk-UA/login';
 };
 
+
+const applyStaking2 = () => {
+  const sumStaking = formattedBalanceTON - amountSend
+  const prevStaked = parseFloat(formattedStakedTON) + parseFloat(amountSend);
+  showLoading(() => {
+    triggerHapticFeedback();
+    localStorage.setItem("tonBalance", sumStaking)
+    localStorage.setItem("stakedTon", prevStaked)
+    if (!initialTimestamp) {
+      localStorage.setItem('initialTimestamp', timestamp);
+    }
+    setStakingTon(false)
+    setInfoApply1(false);
+    setInfoApply2(true);
+  });
+};
+
+  const doneStaking = () => {
+    setInfoApply2(false);
+  };
+  const applyStaking = () => {
+    setInfoApply1(!infoApply1);
+  };
+  const infoTetherComissoin = () => {
+    setTetherComission(!tetherComission);
+  };
+  const infoToncoinComissoin = () => {
+    setToncoinComission(!toncoinComission);
+  };
+  const infoAvaxComissoin = () => {
+    setAvaxComission(!avaxComission);
+  };
+  const infoPolygonComissoin = () => {
+    setPolygonComission(!polygonComission);
+  };
+  const infoBitcoinComissoin = () => {
+    setBitcoinComission(!bitcoinComission);
+  };
   const infoTether = () => {
     setInfoTetherUp(!infoTetherUp);
   };
@@ -736,6 +795,32 @@ const DollarPage = () => {
     setSettingsMenuPrivateBitcoin(!settingsMenuPrivateBitcoin);
   };
 
+  const closeTetherComission = () => {
+    triggerHapticFeedback();
+    setTetherError(false);
+    setTetherComission(false)
+  }
+  const closeToncoinComission = () => {
+    triggerHapticFeedback();
+    setToncoinError(false);
+    setToncoinComission(false)
+  }
+  const closeAvaxComission = () => {
+    triggerHapticFeedback();
+    setNotcoinError(false);
+    setAvaxComission(false)
+  }
+  const closePolygonComission = () => {
+    triggerHapticFeedback();
+    setPolygonError(false);
+    setPolygonComission(false)
+  }
+  const closeBitcoinComission = () => {
+    triggerHapticFeedback();
+    setBitcoinError(false);
+    setBitcoinComission(false)
+  }
+
   const toggleTetherError = () => {
     triggerHapticFeedback()
     setTetherError(!tetherError);
@@ -997,10 +1082,10 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
   };
 
   const priceInSend = priceUsd ? (amountSend * priceUsd).toFixed(2) : 'N/A';
-  const priceInSend2 = priceTon ? (amountSend * priceTon).toFixed(2) : 'N/A';
-  const priceInSend3 = priceBtc ? (amountSend * priceBtc).toFixed(2) : 'N/A';
-  const priceInSend4 = priceNot ? (amountSend * priceNot).toFixed(2) : 'N/A';
-  const priceInSend5 = priceMat ? (amountSend * priceMat).toFixed(2) : 'N/A';
+  const priceInSend2 = priceTon ? (amountSend * priceTon).toFixed(6) : 'N/A';
+  const priceInSend3 = priceBtc ? (amountSend * priceBtc).toFixed(6) : 'N/A';
+  const priceInSend4 = priceNot ? (amountSend * priceNot).toFixed(6) : 'N/A';
+  const priceInSend5 = priceMat ? (amountSend * priceMat).toFixed(6) : 'N/A';
 
   const tetherTon = (amountSend * 0.009) / priceTon;
   const tetherTonFormatted = tetherTon.toFixed(5); 
@@ -1010,23 +1095,38 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
   const avaxTonFormatted = avaxTon.toFixed(5); 
   const polygonTon = (priceInSend5 * 0.009) / priceTon;
   const polygonTonFormatted = polygonTon.toFixed(5); 
+  const toncoinTon = (priceInSend2 * 0.009) / priceTon;
+  const toncoinTonFormatted = toncoinTon.toFixed(5); 
 
   const balanceBTC = localStorage.getItem("btcBalance")
-  const formattedBalanceBTC = balanceBTC ? parseFloat(balanceBTC).toFixed(2) : '0';  
+  const formattedBalanceBTC = balanceBTC ? parseFloat(balanceBTC).toFixed(6) : '0';  
 
   const balanceAVAX = localStorage.getItem("avaxBalance")
-  const formattedBalanceAVAX = balanceAVAX ? parseFloat(balanceAVAX).toFixed(2) : '0';  
+  const formattedBalanceAVAX = balanceAVAX ? parseFloat(balanceAVAX).toFixed(6) : '0';  
 
   const balanceMATIC = localStorage.getItem("maticBalance")
-  const formattedBalanceMATIC = balanceMATIC ? parseFloat(balanceMATIC).toFixed(2) : '0';  
+  const formattedBalanceMATIC = balanceMATIC ? parseFloat(balanceMATIC).toFixed(6) : '0';  
+
+  const balanceTON = localStorage.getItem("tonBalance")
+  const formattedBalanceTON = balanceTON ? parseFloat(balanceTON).toFixed(6) : '0'; 
+
+  const stakedTON = localStorage.getItem("stakedTon")
+  const formattedStakedTON = stakedTON ? parseFloat(stakedTON).toFixed(6) : '0'; 
+
+  const comissionTether = formattedBalanceTON > tetherTonFormatted
+  const comissionToncoin = formattedBalanceTON > toncoinTonFormatted
+  const comissionAvax = formattedBalanceTON > avaxTonFormatted
+  const comissionPolygon = formattedBalanceTON > polygonTonFormatted
+  const comissionBitcoin = formattedBalanceTON > bitcoinTonFormatted
 
   const balanceUSDT = localStorage.getItem('usdtBalance');
   const formattedBalanceUSDT = balanceUSDT ? parseFloat(balanceUSDT).toFixed(2) : '0';  
   const totalSum = priceUsd ? (formattedBalanceUSDT * priceUsd).toFixed(2) : 'N/A';
-  const totalSum4 = priceUsd ? (formattedBalanceUSDT * priceUsd + formattedBalanceBTC * priceBtc + formattedBalanceAVAX * priceNot + formattedBalanceMATIC * priceMat).toFixed(2) : 'N/A';
+  const totalSum4 = priceUsd ? (formattedBalanceUSDT * priceUsd + formattedBalanceBTC * priceBtc + formattedBalanceAVAX * priceNot + formattedBalanceMATIC * priceMat + formattedBalanceTON * priceTon).toFixed(2) : 'N/A';
   const totalSum3 = priceBtc ? (formattedBalanceBTC * priceBtc).toFixed(2) : 'N/A';
   const totalSum5 = priceNot ? (formattedBalanceAVAX * priceNot).toFixed(2) : 'N/A';
   const totalSum6 = priceMat ? (formattedBalanceMATIC * priceMat).toFixed(2) : 'N/A';
+  const totalSum7 = priceTon ? (formattedBalanceTON * priceTon).toFixed(2) : 'N/A';
 
   const totalSum2 = '0.00';
   const earnings = priceUsd ? (formattedBalanceUSDT * (priceUsd - 1)).toFixed(2) : 'N/A';
@@ -1043,9 +1143,9 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
     {
       name: 'Toncoin',
       image: ImTon,
-      balance: '0 TON',
+      balance: `${formattedBalanceTON} TON`,
       value: `$${priceTon}`,
-      summa: `$${totalSum2}`,
+      summa: `$${totalSum7}`,
       method: toncoinBaseMenu
     },
     {
@@ -1073,6 +1173,25 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
       method: bitcoinBaseMenu
     }
   ];
+
+  const staking25 = () => {
+    const new25 = (formattedBalanceTON * 0.25).toFixed(6)
+    setAmountSend(new25)
+  }
+  const staking50 = () => {
+    const new50 = (formattedBalanceTON * 0.50).toFixed(6)
+    setAmountSend(new50)
+  }
+  const staking75 = () => {
+    const new75 = (formattedBalanceTON * 0.75).toFixed(6)
+    setAmountSend(new75)
+  }
+  const staking100 = () => {
+    const new100 = (formattedBalanceTON * 1).toFixed(6)
+    setAmountSend(new100)
+  }
+
+  
 
   const visibleTokensCount = Object.values(tokens).filter(Boolean).length;
   const managementTopPosition = 570 - (5 - visibleTokensCount) * 60;
@@ -1165,7 +1284,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <ArrowBackIcon />Назад
           </Box>
           <SendBase image={ImUsd} text1Left="Tether" symbol="USDT" text2Left={formattedBalanceUSDT} method={toggleSendMenuTether} />
-          <SendBase image={ImTon} text1Left="Toncoin" symbol="TON" text2Left={toncoinP}  method={toggleSendMenuToncoin} />
+          <SendBase image={ImTon} text1Left="Toncoin" symbol="TON" text2Left={formattedBalanceTON}  method={toggleSendMenuToncoin} />
           <SendBase image={ImNot} text1Left="Avax" symbol="AVAX" text2Left={formattedBalanceAVAX} method={toggleSendMenuNotcoin} />
           <SendBase image={ImMat} text1Left="Polygon" symbol="MATIC" text2Left={formattedBalanceMATIC} method={toggleSendMenuPolygon} />
           <SendBase image={ImBtc} text1Left="Bitcoin" symbol="BTC" text2Left={formattedBalanceBTC} method={toggleSendMenuBitcoin} />
@@ -1453,7 +1572,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           </Box>        
         </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  width: "100%" }}>
-          <Typography variant="h6" sx={{ color: getColor2(), fontSize: "20px", }}>
+          <Typography variant="h6" sx={{ color: getColor(), fontSize: "20px", }}>
             {getColor() === 'white' ? `$${priceInSend}` : "-"}
           </Typography>
           </Box>
@@ -1505,18 +1624,18 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           </Box>
           <Box sx={{ borderBottom: '1px solid #555', marginBottom: '20px' }} />
           <Box sx={{ height: "100px", display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "40px", width: "100%" }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColorAll(), fontSize: getFontSize() }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColor2(), fontSize: getFontSize() }}>
             <input
               type="text" inputMode="numeric" pattern="[0-9]*" ref={amountRef} value={amountSend} onChange={handleInputChangeSend} onFocus={handleFocus} onBlur={handleBlur} autoFocus
               style={{ color: 'inherit',fontWeight: 'inherit', outline: 'none', fontSize: 'inherit',  backgroundColor: 'transparent', border: 'none', textAlign: 'right', caretColor: 'white', width: '100px',  // Ensure the input box has a fixed width
                 marginRight: "5px"}} />
-            <Typography variant="h6" sx={{ color: getColorAll(), fontSize: getFontSize(), fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={{ color: getColor2(), fontSize: getFontSize(), fontWeight: 'bold' }}>
               TON
             </Typography>
           </Box>        
         </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  width: "100%" }}>
-          <Typography variant="h6" sx={{ color: getColorAll(), fontSize: "20px", }}>
+          <Typography variant="h6" sx={{ color: getColor2(), fontSize: "20px", }}>
             {getColor2() === 'white' ? `$${priceInSend2}` : "-"}
           </Typography>
           </Box>
@@ -1527,12 +1646,12 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
               Доступно
             </Typography>
             <Typography sx={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
-              {toncoinP} TON
+              {formattedBalanceTON} TON
             </Typography>
           </Box>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', textTransform: 'capitalize', color: "white" }}
-            onClick={() => setAmountSend(toncoinP)} >
+            onClick={() => setAmountSend(formattedBalanceTON)} >
             Максимум
           </Button>
         </Box>
@@ -1541,8 +1660,8 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled={getColorAll() !== 'white' || priceInSend == 0}
+              onClick={toggleToncoinError}
+              disabled={getColor2() !== 'white' || priceInSend2 == 0}
             >
               Далее
             </Button>
@@ -1705,7 +1824,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           </Box>        
         </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  width: "100%" }}>
-          <Typography variant="h6" sx={{ color: getColor2(), fontSize: "20px", }}>
+          <Typography variant="h6" sx={{ color: getColor3(), fontSize: "20px", }}>
             {getColor3() === 'white' ? `$${priceInSend3}` : "-"}
           </Typography>
           </Box>
@@ -1773,11 +1892,16 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                 <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия сети  </Typography>
                 
 
-                <Typography variant="body1" sx={{ fontSize: '13px', color: '#ff4d4d' }}>{tetherTonFormatted} TON</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: comissionTether ? 'white' : '#ff4d4d' }}>{tetherTonFormatted} TON</Typography>
               </Box>
-                <Box onClick={infoTether} sx={{  display: 'flex', alignItems: 'left',  padding: '0 20px' }}>
-                <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
-                </Box>
+                
+              {!comissionTether && (
+                  <Box onClick={infoTether} sx={{ display: 'flex', alignItems: 'left', padding: '0 20px' }}>
+                    <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: '-15px', marginBottom: '10px' }}>
+                      Недостаточно TON ⓘ
+                    </Typography>
+                  </Box>
+                )}
               
             </Box>
                 
@@ -1788,8 +1912,68 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled="true"
+              onClick={infoTetherComissoin}
+              disabled={!comissionTether}
+            >
+              Отправить
+            </Button>
+          </Box>
+                    
+              </Paper>
+            )}
+
+{toncoinError && (
+              <Paper sx={{  position: 'fixed', color: "white", bottom: 0, left: 0, width: '100%', height: '96%', bgcolor: '#333', padding: '0px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)', zIndex: 1200, borderRadius: '12px 12px 0 0', animation: 'slide-up 0.3s ease-in-out' }}>
+                <Box onClick={toggleToncoinError} sx={{ height: '30px', bgcolor: '#444', display: 'flex', alignItems: 'center', justifyContent: 'left', borderRadius: '12px 12px 0 0', marginBottom: '10px', padding: "10px" }}>
+                  <ArrowBackIcon />Назад
+                </Box>
+                <Box sx={{  display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: "30px" }}>
+                  <Box sx={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src={ImSend} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </Box>
+                </Box>
+                
+                <Box sx={{ textAlign: 'center', justifyContent: 'center', marginTop: "30px" }}>
+                  <Typography sx={{ color: 'white', fontSize: '40px', fontWeight: "bold" }}>{amountSend} TON</Typography>
+                  <Typography sx={{ color: 'white', fontSize: '16px' }}>
+                    ${priceInSend2}
+                  </Typography>
+           
+              
+            <Box sx={{ width: '90%', height: '152px', bgcolor: '#444', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '0 auto', mt: '20px' }}>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777'  }}>Куда</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>{formatAddress(inputValueToncoin)}</Typography>
+              </Box>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Сеть</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>TON</Typography>
+              </Box>
+              <Box sx={{ height: '33.33%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия сети  </Typography>
+                
+
+                <Typography variant="body1" sx={{ fontSize: '13px', color: comissionToncoin ? 'white' : '#ff4d4d' }}>{toncoinTonFormatted} TON</Typography>
+              </Box>
+              {!comissionToncoin && (
+                  <Box onClick={infoTether} sx={{ display: 'flex', alignItems: 'left', padding: '0 20px' }}>
+                    <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: '-15px', marginBottom: '10px' }}>
+                      Недостаточно TON ⓘ
+                    </Typography>
+                  </Box>
+                )}
+              
+            </Box>
+                
+                
+
+          </Box>
+          <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+            <Button
+              variant="contained"
+              style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+              onClick={infoToncoinComissoin}
+              disabled={!comissionToncoin}
             >
               Отправить
             </Button>
@@ -1811,7 +1995,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                 </Box>
                 
                 <Box sx={{ textAlign: 'center', justifyContent: 'center', marginTop: "30px" }}>
-                  <Typography sx={{ color: 'white', fontSize: '40px', fontWeight: "bold" }}>{amountSend} USDT</Typography>
+                  <Typography sx={{ color: 'white', fontSize: '40px', fontWeight: "bold" }}>{amountSend} BTC</Typography>
                   <Typography sx={{ color: 'white', fontSize: '16px' }}>
                     ${priceInSend3}
                   </Typography>
@@ -1830,11 +2014,15 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                 <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия сети  </Typography>
                 
 
-                <Typography variant="body1" sx={{ fontSize: '13px', color: '#ff4d4d' }}>{bitcoinTonFormatted} TON</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: comissionBitcoin ? 'white' : '#ff4d4d' }}>{bitcoinTonFormatted} TON</Typography>
               </Box>
-                <Box onClick={infoTether} sx={{  display: 'flex', alignItems: 'left',  padding: '0 20px' }}>
-                <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
-                </Box>
+              {!comissionBitcoin && (
+                  <Box onClick={infoTether} sx={{ display: 'flex', alignItems: 'left', padding: '0 20px' }}>
+                    <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: '-15px', marginBottom: '10px' }}>
+                      Недостаточно TON ⓘ
+                    </Typography>
+                  </Box>
+                )}
               
             </Box>
                 
@@ -1845,8 +2033,8 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled="true"
+              onClick={infoBitcoinComissoin}
+              disabled={!comissionBitcoin}
             >
               Отправить
             </Button>
@@ -1867,7 +2055,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                 </Box>
                 
                 <Box sx={{ textAlign: 'center', justifyContent: 'center', marginTop: "30px" }}>
-                  <Typography sx={{ color: 'white', fontSize: '40px', fontWeight: "bold" }}>{amountSend} USDT</Typography>
+                  <Typography sx={{ color: 'white', fontSize: '40px', fontWeight: "bold" }}>{amountSend} AVAX</Typography>
                   <Typography sx={{ color: 'white', fontSize: '16px' }}>
                     ${priceInSend4}
                   </Typography>
@@ -1886,11 +2074,15 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                 <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия сети  </Typography>
                 
 
-                <Typography variant="body1" sx={{ fontSize: '13px', color: '#ff4d4d' }}>{avaxTonFormatted} TON</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: comissionAvax ? 'white' : '#ff4d4d' }}>{avaxTonFormatted} TON</Typography>
               </Box>
-                <Box onClick={infoTether} sx={{  display: 'flex', alignItems: 'left',  padding: '0 20px' }}>
-                <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
-                </Box>
+              {!comissionAvax && (
+                  <Box onClick={infoTether} sx={{ display: 'flex', alignItems: 'left', padding: '0 20px' }}>
+                    <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: '-15px', marginBottom: '10px' }}>
+                      Недостаточно TON ⓘ
+                    </Typography>
+                  </Box>
+                )}
               
             </Box>
                 
@@ -1901,8 +2093,8 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled="true"
+              onClick={infoAvaxComissoin}
+              disabled={!comissionAvax}
             >
               Отправить
             </Button>
@@ -1942,11 +2134,15 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                 <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия сети  </Typography>
                 
 
-                <Typography variant="body1" sx={{ fontSize: '13px', color: '#ff4d4d' }}>{polygonTonFormatted} TON</Typography>
+                <Typography variant="body1" sx={{ fontSize: '13px', color: comissionPolygon ? 'white' : '#ff4d4d' }}>{polygonTonFormatted} TON</Typography>
               </Box>
-                <Box onClick={infoTether} sx={{  display: 'flex', alignItems: 'left',  padding: '0 20px' }}>
-                <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
-                </Box>
+              {!comissionPolygon && (
+                  <Box onClick={infoTether} sx={{ display: 'flex', alignItems: 'left', padding: '0 20px' }}>
+                    <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: '-15px', marginBottom: '10px' }}>
+                      Недостаточно TON ⓘ
+                    </Typography>
+                  </Box>
+                )}
               
             </Box>
                 
@@ -1957,8 +2153,8 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled="true"
+              onClick={infoPolygonComissoin}
+              disabled={!comissionPolygon}
             >
               Отправить
             </Button>
@@ -2003,6 +2199,294 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                     </Box>
                   </Paper>
                 )}
+
+{infoApply1 && (
+                  <Paper 
+                    sx={{ 
+                      position: 'fixed',color: "white",bottom: 0,left: 0,width: '100%',height: '45%',bgcolor: '#222',padding: '0px',boxShadow: '0 4px 8px rgba(0,0,0,0.2)',zIndex: 1250,borderRadius: '40px 40px 0 0',animation: 'slide-up 0.3s ease-in-out' 
+                    }}
+                  >
+                    <Box 
+                      onClick={applyStaking} 
+                      sx={{height: '30px',bgcolor: '#222',display: 'flex',alignItems: 'center',justifyContent: 'left',borderRadius: '40px 40px 0 0',marginLeft: '10px',padding: "17px"}}>
+                      <CloseIcon />
+                    </Box>
+                    <Box sx={{ textAlign: 'center', justifyContent: 'center', marginTop: "5px" }}>
+                  <Typography sx={{ color: 'white', fontSize: '15px', fontWeight: "bold" }}> Застейкать {amountSend} TON?</Typography>
+                  <Typography sx={{ color: 'white', fontSize: '10px' }}>
+                    Информация будет доступна во вкладке Staking
+                  </Typography>
+           
+                      
+                    <Box sx={{ width: '90%', height: '30px', bgcolor: '#444', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '0 auto', mt: '10px' }}>
+                      
+                      <Box sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', borderTop: '1px solid #222' }}>
+                        <Typography variant="body1" sx={{ fontSize: '13px', color: '#777' }}>Комиссия</Typography>
+                        <Typography variant="body1" sx={{ fontSize: '13px', color: 'white' }}>0 TON</Typography>
+                      </Box>
+                      </Box>
+                      <Typography sx={{ color: 'white', fontSize: '10px', mt: "10px" }}>
+                    Вы можете вернуть средства обратно на свой счет в любой момент
+                  </Typography>
+                  </Box>
+                    <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+                    onClick={applyStaking2}
+                  >
+                    Подтвердить
+                  </Button>
+                </Box>
+                    </Paper>
+                )}
+              {infoApply2 && (
+                          <Paper
+                            sx={{
+                              position: 'fixed', 
+                              color: "white", 
+                              bottom: 0, 
+                              left: 0, 
+                              width: '100%', 
+                              height: '55%', 
+                              bgcolor: '#222', 
+                              padding: '0px', 
+                              boxShadow: '0 4px 8px rgba(0,0,0,0.2)', 
+                              zIndex: 1250, 
+                              borderRadius: '40px 40px 0 0', 
+                              animation: 'slide-up 0.3s ease-in-out'
+                            }}
+                          >
+                            <Box
+                              onClick={doneStaking}
+                              sx={{ 
+                                height: '30px', 
+                                bgcolor: '#222', 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                justifyContent: 'flex-start', 
+                                borderRadius: '40px 40px 0 0', 
+                                marginLeft: '10px', 
+                                padding: "17px" 
+                              }}
+                            >
+                              <CloseIcon />
+                            </Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                              <Box sx={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <img src={ImSucces} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                              </Box>
+                            </Box>
+                            <Box 
+                              sx={{ 
+                                bgcolor: '#222',  
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                alignItems: 'center', 
+                                justifyContent: 'center' 
+                              }}
+                            >
+                              <Typography sx={{ margin: "5px", fontSize: '30px', color: 'lightgreen', textAlign: 'center', mt: "30px" }}>
+                                Успешно 
+                              </Typography>
+                              <Typography sx={{ margin: "5px", fontSize: '18px', color: 'white', textAlign: 'center', mt: "10px" }}>
+                                {formattedStakedTON} TON Застейканы
+                              </Typography>
+                            </Box>
+                            <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+                              <Button
+                                variant="contained"
+                                style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+                                onClick={doneStaking}
+                              >
+                                Готово
+                              </Button>
+                            </Box>
+                          </Paper>
+                        )}
+
+        {tetherComission && (
+                  <Paper 
+                    sx={{ 
+                      position: 'fixed',color: "white",bottom: 0,left: 0,width: '100%',height: '45%',bgcolor: '#222',padding: '0px',boxShadow: '0 4px 8px rgba(0,0,0,0.2)',zIndex: 1250,borderRadius: '40px 40px 0 0',animation: 'slide-up 0.3s ease-in-out' 
+                    }}
+                  >
+                    <Box 
+                      onClick={infoTetherComissoin} 
+                      sx={{height: '30px',bgcolor: '#222',display: 'flex',alignItems: 'center',justifyContent: 'left',borderRadius: '40px 40px 0 0',marginLeft: '10px',padding: "17px"}}>
+                      <CloseIcon />
+                    </Box>
+                    <Box 
+                      sx={{display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
+                      <Box 
+                        sx={{width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden',display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px' }}>
+                        <img 
+                          src={ImInfo} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </Box>
+                    </Box>
+                    <Box 
+                      sx={{bgcolor: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center', mt: "10px" }}>
+                      <Typography variant="body1" sx={{ fontSize: '24px', color: 'white' }}>
+                        Вывод доступен от $100.00
+                      </Typography>
+                    </Box>
+                    <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+                    onClick={closeTetherComission}
+                  >
+                    Понятно
+                  </Button>
+                </Box>
+                    </Paper>
+                )}
+              {toncoinComission && (
+                  <Paper 
+                    sx={{ 
+                      position: 'fixed',color: "white",bottom: 0,left: 0,width: '100%',height: '45%',bgcolor: '#222',padding: '0px',boxShadow: '0 4px 8px rgba(0,0,0,0.2)',zIndex: 1250,borderRadius: '40px 40px 0 0',animation: 'slide-up 0.3s ease-in-out' 
+                    }}
+                  >
+                    <Box 
+                      onClick={infoToncoinComissoin} 
+                      sx={{height: '30px',bgcolor: '#222',display: 'flex',alignItems: 'center',justifyContent: 'left',borderRadius: '40px 40px 0 0',marginLeft: '10px',padding: "17px"}}>
+                      <CloseIcon />
+                    </Box>
+                    <Box 
+                      sx={{display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
+                      <Box 
+                        sx={{width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden',display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px' }}>
+                        <img 
+                          src={ImInfo} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </Box>
+                    </Box>
+                    <Box 
+                      sx={{bgcolor: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center', mt: "10px" }}>
+                      <Typography variant="body1" sx={{ fontSize: '24px', color: 'white' }}>
+                        Вывод доступен от $100.00
+                      </Typography>
+                    </Box>
+                    <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+                    onClick={closeToncoinComission}
+                  >
+                    Понятно
+                  </Button>
+                </Box>
+                    </Paper>
+                )}
+                {avaxComission && (
+                  <Paper 
+                    sx={{ 
+                      position: 'fixed',color: "white",bottom: 0,left: 0,width: '100%',height: '45%',bgcolor: '#222',padding: '0px',boxShadow: '0 4px 8px rgba(0,0,0,0.2)',zIndex: 1250,borderRadius: '40px 40px 0 0',animation: 'slide-up 0.3s ease-in-out' 
+                    }}
+                  >
+                    <Box 
+                      onClick={infoAvaxComissoin} 
+                      sx={{height: '30px',bgcolor: '#222',display: 'flex',alignItems: 'center',justifyContent: 'left',borderRadius: '40px 40px 0 0',marginLeft: '10px',padding: "17px"}}>
+                      <CloseIcon />
+                    </Box>
+                    <Box 
+                      sx={{display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
+                      <Box 
+                        sx={{width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden',display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px' }}>
+                        <img 
+                          src={ImInfo} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </Box>
+                    </Box>
+                    <Box 
+                      sx={{bgcolor: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center', mt: "10px" }}>
+                      <Typography variant="body1" sx={{ fontSize: '24px', color: 'white' }}>
+                        Вывод доступен от $100.00
+                      </Typography>
+                    </Box>
+                    <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+                    onClick={closeAvaxComission}
+                  >
+                    Понятно
+                  </Button>
+                </Box>
+                    </Paper>
+                )}
+                {polygonComission && (
+                  <Paper 
+                    sx={{ 
+                      position: 'fixed',color: "white",bottom: 0,left: 0,width: '100%',height: '45%',bgcolor: '#222',padding: '0px',boxShadow: '0 4px 8px rgba(0,0,0,0.2)',zIndex: 1250,borderRadius: '40px 40px 0 0',animation: 'slide-up 0.3s ease-in-out' 
+                    }}
+                  >
+                    <Box 
+                      onClick={infoPolygonComissoin} 
+                      sx={{height: '30px',bgcolor: '#222',display: 'flex',alignItems: 'center',justifyContent: 'left',borderRadius: '40px 40px 0 0',marginLeft: '10px',padding: "17px"}}>
+                      <CloseIcon />
+                    </Box>
+                    <Box 
+                      sx={{display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
+                      <Box 
+                        sx={{width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden',display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px' }}>
+                        <img 
+                          src={ImInfo} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </Box>
+                    </Box>
+                    <Box 
+                      sx={{bgcolor: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center', mt: "10px" }}>
+                      <Typography variant="body1" sx={{ fontSize: '24px', color: 'white' }}>
+                        Вывод доступен от $100.00
+                      </Typography>
+                    </Box>
+                    <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+                    onClick={closePolygonComission}
+                  >
+                    Понятно
+                  </Button>
+                </Box>
+                    </Paper>
+                )}
+                {bitcoinComission && (
+                  <Paper 
+                    sx={{ 
+                      position: 'fixed',color: "white",bottom: 0,left: 0,width: '100%',height: '45%',bgcolor: '#222',padding: '0px',boxShadow: '0 4px 8px rgba(0,0,0,0.2)',zIndex: 1250,borderRadius: '40px 40px 0 0',animation: 'slide-up 0.3s ease-in-out' 
+                    }}
+                  >
+                    <Box 
+                      onClick={infoBitcoinComissoin} 
+                      sx={{height: '30px',bgcolor: '#222',display: 'flex',alignItems: 'center',justifyContent: 'left',borderRadius: '40px 40px 0 0',marginLeft: '10px',padding: "17px"}}>
+                      <CloseIcon />
+                    </Box>
+                    <Box 
+                      sx={{display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
+                      <Box 
+                        sx={{width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden',display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px' }}>
+                        <img 
+                          src={ImInfo} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </Box>
+                    </Box>
+                    <Box 
+                      sx={{bgcolor: '#222', display: 'flex', alignItems: 'center', justifyContent: 'center', mt: "10px" }}>
+                      <Typography variant="body1" sx={{ fontSize: '24px', color: 'white' }}>
+                        Вывод доступен от $100.00
+                      </Typography>
+                    </Box>
+                    <Box sx={{ textAlign: 'center', position: 'fixed', bottom: '50px', width: '100%', left: 0 }}>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
+                    onClick={closeBitcoinComission}
+                  >
+                    Понятно
+                  </Button>
+                </Box>
+                    </Paper>
+                )}
+
+
             {/* info delite */}
             {infoDelite && (
                   <Paper 
@@ -2117,9 +2601,16 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           <Box onClick={toggleStaking} sx={{ height: '30px', bgcolor: '#444', display: 'flex', alignItems: 'center', justifyContent: 'left', borderRadius: '12px 12px 0 0', marginBottom: '10px', padding: "10px" }}>
             <ArrowBackIcon />Назад
           </Box>
-          <Box onClick={infoStaking} sx={{  display: 'flex', alignItems: 'center',  padding: '20px' }}>
-                <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
-                </Box>
+          {!formattedBalanceTON && (
+            <Box onClick={infoStaking} sx={{  display: 'flex', alignItems: 'center',  padding: '20px' }}>
+            <Typography variant="body1" sx={{ fontSize: '11px', color: '#ff4d4d', marginTop: "-15px", marginBottom: "10px" }}>Недостаточно TON  ⓘ</Typography>
+            </Box>
+          )}
+          {formattedBalanceTON && (
+            <Box onClick={infoStaking} sx={{  display: 'flex', alignItems: 'center',  padding: '20px' }}>
+            <Typography variant="body1" sx={{ fontSize: '11px', color: 'white', marginTop: "-15px", marginBottom: "10px" }}>Стейкинг</Typography>
+            </Box>
+          )}
           <Box sx={{ height: "100px", display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "40px", width: "100%" }}>
           <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 'bold', color: getColorAll(), fontSize: getFontSize() }}>
               <input
@@ -2134,22 +2625,22 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           <Box sx={{display: "flex", justifyContent: "space-between", margin: "5px"}}>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', color: "white", margin: '5px' }}
-            onClick={() => setAmountSend(bitcoinP)} >
+            onClick={staking25} >
             25%
           </Button>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', color: "white", margin: '5px' }}
-            onClick={() => setAmountSend(bitcoinP)} >
+            onClick={staking50} >
             50%
           </Button>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', color: "white", margin: '5px' }}
-            onClick={() => setAmountSend(bitcoinP)} >
+            onClick={staking75} >
             75%
           </Button>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', color: "white", margin: '5px' }}
-            onClick={() => setAmountSend(bitcoinP)} >
+            onClick={staking100} >
             100%
           </Button>
           
@@ -2163,7 +2654,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             </Typography>
             <Box sx={{ display: "flex"}}>
               <Typography sx={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
-              {toncoinP} TON
+              {formattedBalanceTON} TON
             </Typography>
             <Typography sx={{ color: 'gray', fontSize: '15px', marginLeft: "5px" }}>
               Комиссия (0%)
@@ -2174,7 +2665,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
           </Box>
           <Button 
             style={{ borderRadius: '50px', height: '35px', width: '30%', backgroundColor: '#444', color: "white",textTransform: 'capitalize'  }}
-            onClick={() => setAmountSend(bitcoinP)} >
+            onClick={staking100} >
             Максимум
           </Button>
         </Box>
@@ -2182,10 +2673,10 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <Button
               variant="contained"
               style={{ borderRadius: '50px', height: '50px', width: '90%', backgroundColor: '#D5A9D9', textTransform: 'capitalize', fontWeight: 'bold' }}
-              onClick={toggleTetherError}
-              disabled="true"
+              onClick={applyStaking}
+              disabled={amountSend <= 0 || amountSend > formattedBalanceTON}
             >
-              застейкать
+              Застейкать
             </Button>
           </Box>
           
@@ -3141,9 +3632,9 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <ArrowBackIcon />Назад
           </Box>
           <Box sx={{ textAlign: 'center', justifyContent: 'center' }}>
-            <Typography sx={{ color: 'white', fontSize: '40px' }}>0 TON</Typography>
+            <Typography sx={{ color: 'white', fontSize: '40px' }}>{formattedBalanceTON} TON</Typography>
             <Typography sx={{ color: 'white', fontSize: '16px' }}>
-              $0.00 
+            {formatPrice(totalSum7)}
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px', gap: '30px' }}>
               <InfoBox onClick={toggleGetToncoinMenu} icon={<AddIcon sx={{ color: '#BE98C2B5', fontSize: '40px' }} />} text="Получить" />
@@ -3175,7 +3666,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <ArrowBackIcon />Назад
           </Box>
           <Box sx={{ textAlign: 'center', justifyContent: 'center' }}>
-            <Typography sx={{ color: 'white', fontSize: '40px' }}>0 AVAX</Typography>
+            <Typography sx={{ color: 'white', fontSize: '40px' }}>{formattedBalanceAVAX} AVAX</Typography>
             <Typography sx={{ color: 'white', fontSize: '16px' }}>
             {formatPrice(totalSum5)} 
             </Typography>
@@ -3209,7 +3700,7 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
             <ArrowBackIcon />Назад
           </Box>
           <Box sx={{ textAlign: 'center', justifyContent: 'center' }}>
-            <Typography sx={{ color: 'white', fontSize: '40px' }}>0 MATIC</Typography>
+            <Typography sx={{ color: 'white', fontSize: '40px' }}>{formattedBalanceMATIC} MATIC</Typography>
             <Typography sx={{ color: 'white', fontSize: '16px' }}>
             {formatPrice(totalSum6)} 
             </Typography>
@@ -3268,6 +3759,14 @@ const privatePhraseBitcoin = getUserBitcoinPhrase(webUserId);
                 <CustomRectangle tokenname="Bitcoin"  netname="BTC"   pricenumber={formatPrice(priceBtc)}/>
           </Box>
         </Paper>
+      )}
+
+  {isLoadingArrow && (
+        <Box sx={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 1333, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Box sx={{ width: '100px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Typography>Подтверждение...</Typography>
+          </Box>
+        </Box>
       )}
 
       {/* Меню Получения tether */}
