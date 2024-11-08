@@ -45,7 +45,7 @@ const HomePage = () => {
     const platform = navigator.platform.toLowerCase();
     if (platform.includes("win") || platform.includes("mac")) {
       console.log("Open on your mobile device");
-      setPageLoaded(true);
+      setPageLoaded(false);
     } else {
       setPageLoaded(true);
     }
