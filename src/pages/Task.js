@@ -20,7 +20,7 @@ const Task = () => {
       </div>
       <div className="task-center-text">📋</div>
       <div className="task-components">
-        <Public />
+        {/* <Public /> */}
         <MostBet />
         {/* <Win1 /> */}
         <Ant />

@@ -186,10 +186,25 @@ const Web3 = () => {
         sx={{ '& .MuiBottomNavigationAction-label': { fontSize: '0.1rem' }, paddingTop: "10px" }}
       />
       <BottomNavigationAction
-        label="Activity"
-        icon={<EnergyIcon sx={{ fontSize: 22 }} />}
-        sx={{ '& .MuiBottomNavigationAction-label': { fontSize: '0.1rem' }, paddingTop: "10px" }}
-      />
+  label="Activity"
+  icon={
+    <EnergyIcon
+      sx={{
+        fontSize: 22,
+        animation: 'blink 3s infinite',
+        '@keyframes blink': {
+          '0%': { color: '#beeb9f' },
+          '50%': { color: 'white' },
+          '100%': { color: '#a3de83' },
+        },
+      }}
+    />
+  }
+  sx={{
+    '& .MuiBottomNavigationAction-label': { fontSize: '0.1rem' },
+    paddingTop: '10px',
+  }}
+/>
       <BottomNavigationAction
         label="Browser"
         icon={<GlobeIcon sx={{ fontSize: 22 }} />}
