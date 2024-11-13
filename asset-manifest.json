@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/qwedf/static/css/main.ca5b1add.css",
-    "main.js": "/qwedf/static/js/main.19cedc2d.js",
+    "main.css": "/qwedf/static/css/main.b306f3ca.css",
+    "main.js": "/qwedf/static/js/main.915aacc7.js",
     "static/media/photo_2024-03-28_23-01-05-transformed.png": "/qwedf/static/media/photo_2024-03-28_23-01-05-transformed.b9e06be3e22550f07dba.png",
     "static/media/IMG_5556.png": "/qwedf/static/media/IMG_5556.fa76c4bf9ec746a77cd2.png",
     "static/media/boost-removebg-preview.png": "/qwedf/static/media/boost-removebg-preview.93191f01df361f35650d.png",
@@ -46,11 +46,11 @@
     "static/media/Kick_logo.svg.png": "/qwedf/static/media/Kick_logo.svg.535a23faaa0c9283881a.png",
     "static/media/1123.avif": "/qwedf/static/media/1123.717d89b84eafe3f66456.avif",
     "index.html": "/qwedf/index.html",
-    "main.ca5b1add.css.map": "/qwedf/static/css/main.ca5b1add.css.map",
-    "main.19cedc2d.js.map": "/qwedf/static/js/main.19cedc2d.js.map"
+    "main.b306f3ca.css.map": "/qwedf/static/css/main.b306f3ca.css.map",
+    "main.915aacc7.js.map": "/qwedf/static/js/main.915aacc7.js.map"
   },
   "entrypoints": [
-    "static/css/main.ca5b1add.css",
-    "static/js/main.19cedc2d.js"
+    "static/css/main.b306f3ca.css",
+    "static/js/main.915aacc7.js"
   ]
 }
