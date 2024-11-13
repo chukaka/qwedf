@@ -21,6 +21,7 @@ const Task = () => {
       <div className="task-center-text">📋</div>
       <div className="task-components">
         {/* <Public /> */}
+        <Mellbet />
         <MostBet />
         {/* <Win1 /> */}
         <Ant />
