@@ -25,6 +25,7 @@ body {
     height: 100vh;
     background: #16161e;
     color: white;
+    overflow: hidden;
     
 }
 
