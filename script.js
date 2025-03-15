@@ -29,3 +29,5 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Транзакция не найдена! Попробуйте позже или совершите перевод.");
     });
 });
+
+window.Telegram.WebApp.requestFullscreen() 
